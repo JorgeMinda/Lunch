@@ -1,0 +1,45 @@
+﻿Almuerzo Saludable Estudiantil,,,,
+Componente,Cantidad,Unidad,Costo Unitario,Costo por Porción
+PROTEINA,100,GR,0.0072,0.72
+GUARNICION,50,GR,0.001,0.05
+ARROZ,40,GR,0.003,0.12
+ENSALADA,55,GR,0.002,0.11
+FRUTA,37,GR,0.003,0.11
+Salsas,3,GR,0.004,0.01
+JUGO,8,ONZ,0.014,0.11
+,,,,1.24
+,,,,
+,,,,
+Almuerzo Estudiantil Completo Especial,,,,
+Componente,Cantidad,Unidad,Costo Unitario,Costo por Porción
+SOPA,10,ONZ,0.015,0.15
+PROTEINA,100,GR,0.0072,0.72
+GUARNICION,48,GR,0.001,0.05
+ARROZ,41,GR,0.003,0.12
+ENSALADA,42,GR,0.002,0.08
+POSTRE MASA,45,GR,0.003,0.14
+Salsas,3,GR,0.004,0.01
+JUGO,8,ONZ,0.014,0.11
+,,,,1.38
+,,,,
+,,,,
+Refrigerio prescolar/Primaria,,,,
+Componente,Cantidad,Unidad,Costo Unitario,Costo por Porción
+PROTEÍNA,60,GR,0.0047,0.28
+GUARNICIÓN,40,GR,0.0036,0.14
+ENSALADA,15,GR,0.0064,0.1
+FRUTA,25,GR,0.0064,0.16
+JUGO,8,ONZ,0.02,0.16
+,,,,0.84
+,,,,
+Almuerzo Completo Administrativos,,,,
+Componente,Cantidad,Unidad,Costo Unitario,Costo por Porción
+SOPA,12,ONZ,0.015,0.18
+PROTEINA,110,GR,0.0072,0.79
+GUARNICION,60,GR,0.001,0.06
+ARROZ,35,GR,0.003,0.11
+ENSALADA,42,GR,0.002,0.08
+POSTRE/masa o fruta,45,GR,0.0023,0.1
+Salsas,2,GR,0.004,0.01
+JUGO,8,ONZ,0.014,0.11
+,,,,1.44

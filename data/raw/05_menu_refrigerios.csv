@@ -1,0 +1,79 @@
+﻿,,,,,
+OPCION PLATO,2026-08-31 00:00:00,2026-09-01 00:00:00,2026-09-02 00:00:00,2026-09-03 00:00:00,2026-09-04 00:00:00
+FRUTA,Ensalada de frutas,Melón,Piña,Mandarina,Duraznos
+BEBIDA,Yogurt natural ,Jugo de naranjilla,Jugo guanabana,Jugo de mora,Jugo de piña
+ENTRADA,Granola,Tortilla de choclo,Tortillas verde,Chocho tostado,Arepa con carne
+,,,,,
+OPCION PLATO,2026-09-07 00:00:00,2026-09-08 00:00:00,2026-09-09 00:00:00,2026-09-10 00:00:00,2026-09-11 00:00:00
+FRUTA,Frutillas,Manzana,Melón,Sandia,Pera
+BEBIDA,Chocolate frío,Jugo de mango,Yogurt de frutilla,Jugo de mora,Jugo de naranja
+ENTRADA,Torta de naranja,Arepa con carne molida,Granola,Bolón de verde queso,Ensalada cesar
+,,,,,
+OPCION PLATO,2026-09-14 00:00:00,2026-09-15 00:00:00,2026-09-16 00:00:00,2026-09-17 00:00:00,2026-09-18 00:00:00
+FRUTA,Mandarina,Melón,Sandia,Sandia,Naranja
+BEBIDA,Batido de guineo,Jugo de limón rosa,Jugo de maracuyá,Jugo de naranja,Yogurt de durazno
+ENTRADA,Empanada de viento,Chocho tostado,Empanada de verde queso,Arepa con pollo,Guineo-sandía
+,,,,,
+OPCION PLATO,2026-09-21 00:00:00,2026-09-22 00:00:00,2026-09-23 00:00:00,2026-09-24 00:00:00,2026-09-25 00:00:00
+FRUTA,Papaya/naranja,Uvas,Melón,Pera,Manzana
+BEBIDA,Jugo de guanábana,Yogurt de mora,Jugo de naranja,Jugo de mora,Jugo de maracuyá
+ENTRADA,Bolón de verde queso,Cereal 21gr individual,Pancake con miel de maple,Chocho cebolla tomate,Salchipapa refrigerio
+,,,,,
+OPCION PLATO,2026-09-28 00:00:00,2026-09-29 00:00:00,2026-09-30 00:00:00,,
+FRUTA,Mandarina,Durazno,Manzana,,
+BEBIDA,Yogurt de mora,Jugo de mango,Yogurt de durazno,,
+ENTRADA,Muchín de yuca,Maduro con queso refrigerio,"Ensalada de frutas, granola",,
+,,,,,
+,2026-10-01 00:00:00,2026-10-02 00:00:00,2026-10-05 00:00:00,2026-10-06 00:00:00,2026-10-07 00:00:00
+PROTEÍNA,Sándwich Clásico,Burrito Express,Criollito de Choclo,Wrap de Atún,Nuggets con Papitas
+ENSALADA,Rodajas de tomate y lechuga,Col morada y zanahoria rallada,Tomates cherry en mitades,Lechuga picada fina,Bastones de zanahoria
+FRUTA,Mandarina (gajos),Manzana picada,Melón en cubos,Piña en trozos,Frutillas enteras
+JUGO,Jugo de naranja,Jugo de mora,Limonada casera,Jugo de mora ,Jugo de maracuyá
+,2026-10-08 00:00:00,2026-10-09 00:00:00,2026-10-12 00:00:00,2026-10-13 00:00:00,2026-10-14 00:00:00
+PROTEÍNA,Panchito Práctico,Tacos Caseros,Enrollado de Queso,Pollo con Yuca,Mini Pizza Escolar
+ENSALADA,Repollo picado fino,Tomate y cebolla en cubitos,Pepinillos picados,Zanahoria rallada,Rodajas de tomate y albahaca
+FRUTA,Sandía en cubos,Mango picado,Uvas verdes,Manzana verde,Papaya en cubos
+JUGO,Jugo de naranja,Jugo de guanábana,Jugo de guayaba,Limonada imperial,Jugo de mora
+,2026-10-15 00:00:00,2026-10-16 00:00:00,2026-10-19 00:00:00,2026-10-20 00:00:00,2026-10-21 00:00:00
+PROTEÍNA,Croquetas de pescado con Puré,Shawarma de Pollo,Huevo con Maduro,Sándwich de Queso,Carnita con Mote
+ENSALADA,Hojas de espinaca baby,Pepino y tomate picados,Zanahoria cocida en cubos,Lechuga y rodaja de tomate,Cebolla paiteña y tomate
+FRUTA,Frutillas en mitades,Kiwi en rodajas,Piña picada,Mandarina (gajos),Melón en cubos
+JUGO,Jugo de naranja,Jugo de piña,Agua de jamaica,Jugo de maracuyá,Jugo de mora
+,2026-10-22 00:00:00,2026-10-23 00:00:00,2026-10-26 00:00:00,2026-10-27 00:00:00,2026-10-28 00:00:00
+PROTEÍNA,Burguer Casera,Pasta con Pollo,Empanada de Viento,Salpicón de Pollo,Deditos de Pescado
+ENSALADA,Rodaja de tomate y lechuga,Brócoli al vapor (arbolitos),Bastones de apio o pepino,Ralladura de zanahoria y col,Tomates cherry enteros
+FRUTA,Manzana picada,Uvas rojas,Papaya en cubos,Mango en cubos,Frutillas enteras
+JUGO,Jugo de naranja,Limonada casera,Jugo de piña,Jugo de guanábana,Jugo de maracuyá
+,2026-10-29 00:00:00,2026-10-30 00:00:00,,,
+PROTEÍNA,Arepa con carne,Pasta con pollo,,,
+ENSALADA,Lechuga y tomate ,Rodajas de zanahorias,,,
+FRUTA,Sandía,Melón,,,
+JUGO,Jugo de guayaba,jugo de fresa,,,
+,,,,,
+,FERIADO,FERIADO,,,
+DÍAS,2026-11-02 00:00:00,2026-11-03 00:00:00,2026-11-04 00:00:00,2026-11-05 00:00:00,2026-11-06 00:00:00
+PROTEÍNA,,,Humita de Choclo Tierno al Vapor con queso,Alitas agridulce/papa vapor,Mini Pizza Escolar de Pollo y Queso
+ENSALADA,,,Rodajas de tomate ,Lechuga fresca -zanahoria rallada ,Albahaca-tomate 
+FRUTA,,,Guineo / Banano,Uvas Frescas,Rodajas de Piña
+JUGO,,,Avena Polaca con Naranjilla,Jugo Natural de Maracuyá,Limonada Imperial con Miel
+,,,,,
+DÍAS,2026-11-09 00:00:00,2026-11-10 00:00:00,2026-11-11 00:00:00,2026-11-12 00:00:00,2026-11-13 00:00:00
+PROTEÍNA,Bolón de Verde con Queso (Horneado),Empanada de Hojaldre con Pollo,Tortilla de Maduro con Queso,Shawarma de pollo,Mini Sánduche de Pollo Desmenuzado
+ENSALADA,Col-zanahoria,Cubitos de zanahoria- apio al vapor y salsa ,Brócoli al vapor en salsa ,Lechuga- tomate ,Pepinillo -tomate
+FRUTA,Claudia / Ciruela,Pera Dulce,Granadilla,Mandarina,Trozo de Sandía
+JUGO,Jugo Natural de Frutilla,Jugo Natural de Mango,Avena Quaker con Leche y Canela,Jugo Natural de Naranjilla,Té Helado de Frutos Rojos
+DÍAS,2026-11-16 00:00:00,2026-11-17 00:00:00,2026-11-18 00:00:00,2026-11-19 00:00:00,2026-11-20 00:00:00
+PROTEÍNA,Burrito de res,Corviche de Pescado / Queso al Horno,Mote Pillo Suave con Huevo,Empanada de Queso Horneada,Sánduche de Queso Calientito
+ENSALADA,Aguacate,Bastones de Pepino con Limón,Chorizo,Coliflor-bastones de apio,Zucchini al vapor
+FRUTA,Melón en Cubos,Manzana Verde,Mandarina,Uvas,Guineo / Banano
+JUGO,Jugo Natural de Guanábana,Jugo Natural de Mora,Té de frutos rojos ,Jugo de tomate de árbol,Limonada de Frutilla
+DÍAS,2026-11-23 00:00:00,2026-11-24 00:00:00,2026-11-25 00:00:00,2026-11-26 00:00:00,2026-11-27 00:00:00
+PROTEÍNA,Tortilla de Verde con Queso,Arroz salteado con pollo,Tigrillo Suave de Verde y Huevo,Mini Hamburguesa Escolar con Queso,Empanada de Carne Molida Horneada
+ENSALADA,Col-zanahori,Ensalada rusa,Lechuga-tomate,Coleslaw,Zanahoria-brócoli
+FRUTA,Piña en cubos,Mandarina,Pera,Mandarina,Manzana Roja
+JUGO,Jugo Natural de Maracuyá,Jugo Natural de Frutilla,Avena con Naranjilla,Jugo Natural de Mango,Jugo de Naranjilla
+DÍAS,2026-11-30 00:00:00,,,,
+PROTEÍNA,Empanada de Verde con Queso Manaba,,,,
+ENSALADA,Huevo Duro Ensalada,,,,
+FRUTA,Mandarina Dulce,,,,
+JUGO,Jugo Natural de Naranjilla,,,,

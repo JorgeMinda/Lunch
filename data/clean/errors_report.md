@@ -1,0 +1,1032 @@
+# Reporte de errores — Fase 1 (limpieza y normalización)
+
+- Fecha de ejecución: 2026-11-13T02:14:25
+- Catálogo: 458 ingredientes únicos
+- Recetas: 252 únicas (257 apariciones)
+- Ítems de receta: 1560
+- Menú: 30 ciclos, 71 días, 1362 platos
+- Perfiles de costo: 4
+- Totales con regla ×1.08 aplicada: sí
+
+## Resumen por tipo de incidencia
+
+| Tipo | Cantidad |
+|---|---|
+| CANTIDAD_PRESENTACION_VARIA | 367 |
+| CATALOGO_COSTO_INVALIDO | 1 |
+| CATALOGO_DUPLICADO | 2 |
+| CATALOGO_MATCH_FUZZY | 1 |
+| CATALOGO_SIN_CANTIDAD | 5 |
+| INGREDIENTE_SIN_CATALOGO | 13 |
+| MENU_COBERTURA | 1 |
+| MENU_FILAS_ROTAS | 1 |
+| MENU_SEMANA_DUPLICADA | 8 |
+| MENU_SIN_RECETA | 211 |
+| MENU_VALOR_INVALIDO | 2 |
+| PRECIO_VARIA | 54 |
+| RECETA_COSTO_ATIPICO | 2 |
+| RECETA_DUPLICADA_DIFERENTE | 12 |
+| RECETA_SIN_PORCIONES | 186 |
+| RECETA_UNIDAD_DIFIERE | 260 |
+| REFERENCIA_CLIENTE_DESCUADRE | 2 |
+| VALIDACION_VS_ORIGEN | 20 |
+
+## Catálogo sin cantidad de presentación
+
+- 'KIT ANTIDERRAMES' sin cantidad de presentación; asumido 1 UND
+- 'MANGO UNIDAD' sin cantidad de presentación; asumido 1 UND
+- 'ROLLO PAPEL INDUSTRIAL' sin cantidad de presentación; asumido 1 UND
+- 'ZUCCINI AMARILLO' sin cantidad de presentación; asumido 1 UND
+- 'PATAS POLLO / FONDOS LB' sin cantidad de presentación; asumido 1 UND
+
+## Cobertura menú ↔ recetas
+
+- 1151/1362 platos emparejados con recetas (84%)
+
+## Costos inválidos en catálogo
+
+- fila 253: costo '1.0.3' en 'QUESO CREMA 200 GR - EL ARTESANAL'
+
+## Descuadre vs valores de referencia del cliente
+
+- 'BISTEC CRIOLLO 110 GRAMOS': total 0.8053 vs 0.7
+- 'AMBATEÑITO/CHORIZO/HUEVO': total 0.3849 vs 0.3
+
+## Emparejamientos difusos (revisar manualmente)
+
+- 'TORTILLA TRIGO SUAVES MAMA FANY 400 GR X12' ~ 'TORTILLA TRIGO SUAVES MAMA FANY 400 GR' (score 0.95)
+
+## Filas rotas (#REF!) descartadas
+
+- 146 filas #REF! ignoradas al final de la hoja
+
+## Ingredientes de receta sin correspondencia en catálogo
+
+- 'LOMO PULPA NEGRA 1 KILO' (mejor match 0.75)
+- 'CANGUIL 500GR' (mejor match 0.72)
+- 'ACHIOTE ILE EN PASTA 1 KG' (mejor match 0.62)
+- 'OREGANO 200 GR' (mejor match 0.69)
+- 'MAYONESA ADEREZO LA PRIMERA 3.7 KG' (mejor match 0.56)
+- 'MOSTAZA 4 LT' (mejor match 0.52)
+- 'GARBANZO KILO' (mejor match 0.83)
+- 'PASTA LASAÑA PRECOCIDA SUPERMAXI 200 GR' (mejor match 0.71)
+- 'CARNE MOLIDA 1 KILO' (mejor match 0.83)
+- 'OREGANO 200 GR' (mejor match 0.69)
+- 'OREGANO 200 GR' (mejor match 0.69)
+- 'OREGANO 200 GR' (mejor match 0.69)
+- 'MOSTAZA 4 LT' (mejor match 0.52)
+
+## Líneas de receta en unidad distinta a la del catálogo
+
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=1000.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'AJI ROJO LB': receta en G, catálogo en UND (c3=453.0)
+- 'VINAGRE BLANCO 3.7 KG - DELY': receta en ML, catálogo en G (c3=3700.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'VINAGRE BLANCO 3.7 KG - DELY': receta en ML, catálogo en G (c3=3700.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'PAN SANDUCHE 80 GR': receta en UND, catálogo en G (c3=80.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'LECHUGA NACIONAL': receta en UND, catálogo en G (c3=3000.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'ANIS ESTRELLADO LB': receta en G, catálogo en UND (c3=453.0)
+- 'ESENCIA VAINILLA LA ORIGINAL 500 ML': receta en G, catálogo en ML (c3=500.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'SALSA CHINA ORIENTAL 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'LECHUGA NACIONAL': receta en UND, catálogo en G (c3=4000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'ACELGA 500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=500.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'PAPA CHAUCHA LB': receta en G, catálogo en UND (c3=453.0)
+- 'Guasca hoja verde 150 G atado': receta en G, catálogo en UND (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE CHERRY X LIBRA': receta en G, catálogo en UND (c3=453.0)
+- 'ALITAS DE POLLO LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'PIMIENTO ROJO 1 KILO': receta en UND, catálogo en G (c3=1000.0)
+- 'PAPA CHAUCHA LB': receta en G, catálogo en UND (c3=453.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'PAPAYA GRANDE 1KG': receta en UND, catálogo en G (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'SALSA BBQ DE 200 GR - EASEY': receta en ML, catálogo en G (c3=1000.0)
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': receta en G, catálogo en ML (c3=50000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en ML, catálogo en UND (c3=4000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACHIOTE LIQUIDO 200 ML': receta en G, catálogo en ML (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en ML, catálogo en UND (c3=453.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'ACEITE 1 LT': receta en G, catálogo en ML (c3=1000.0)
+- 'SAL YODADA 1 KL': receta en ML, catálogo en G (c3=1000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en G, catálogo en UND (c3=3700.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'CERDO CHULETA EUREKA (101-120) X30': receta en UND, catálogo en G (c3=30.0)
+- 'ACEITE 1 LT': receta en G, catálogo en ML (c3=1000.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en G, catálogo en UND (c3=3700.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA BLANCA 1 KILO': receta en ML, catálogo en G (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CAMOTE LB': receta en G, catálogo en UND (c3=453.0)
+- 'ESPINACA 1 KILO': receta en ML, catálogo en G (c3=1000.0)
+- 'CANELA RAMA GRANDE LB': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'PIMIENTO VERDE 1 LB': receta en ML, catálogo en G (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'ACELGA 500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=453.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'ACEITE 1 LT': receta en G, catálogo en ML (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'AJI ROJO LB': receta en G, catálogo en UND (c3=453.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta en G, catálogo en UND (c3=1000.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'AGUA MINERAL IMPERIAL LIMONADA 330 ML LATA': receta en G, catálogo en ML (c3=1000.0)
+- 'AGUA MINERAL IMPERIAL LIMONADA 550 ML PET': receta en G, catálogo en ML (c3=4000.0)
+- 'DURAZNO': receta en G, catálogo en UND (c3=50000.0)
+- 'MARACUYA FRUTA': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=400.0)
+- 'AVENA QUAKER LB': receta en ML, catálogo en G (c3=20000.0)
+- 'SPRITE 3 LT': receta en G, catálogo en ML (c3=1000.0)
+- 'CUCHARITA NG/50 UNIDADES': receta en G, catálogo en UND (c3=400.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'BALDE MOSTAZA 3.7 KG - DELY / LA ORIGINAL': receta en G, catálogo en UND (c3=3700.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'CEBOLLA COLORADA LB': receta en G, catálogo en UND (c3=453.0)
+- 'CILANTRO X 400 GR': receta en G, catálogo en UND (c3=1000.0)
+- 'TOMATE RIÑON 1 KILO': receta en G, catálogo en UND (c3=1000.0)
+- 'POLLO PECHUGA LB': receta en G, catálogo en UND (c3=453.0)
+- 'PEREJIL500 GR': receta en G, catálogo en UND (c3=500.0)
+- … y 60 más
+
+## Platos de menú sin receta asociada
+
+- 'Sopa Oriental' sin receta asociada
+- 'Lechuga, tomate, zanahoria, pimiento, rabano' sin receta asociada
+- 'Tomate, lechuga, perejil, pepinillo, zuchinni' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Sopa de bolas de verde' sin receta asociada
+- 'Puré de zanahoria blanca' sin receta asociada
+- 'Pan botón ajo 15gr' sin receta asociada
+- 'Papa dorada a las finas hierbas' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Tomate cebolla zanahoria rabano perejil' sin receta asociada
+- 'Pepinillo pimiento tomate zanahoria zuchinni frejol,,' sin receta asociada
+- 'Torta mixta' sin receta asociada
+- 'Chuleta a la plancha' sin receta asociada
+- 'Chuleta a la plancha' sin receta asociada
+- 'Chuleta a la plancha' sin receta asociada
+- 'Spaguetti salteado' sin receta asociada
+- 'Spaguetti salteado' sin receta asociada
+- 'Spaguetti salteado' sin receta asociada
+- 'Papa chaucha salteada' sin receta asociada
+- 'Papa chaucha salteada' sin receta asociada
+- 'Papa chaucha salteada' sin receta asociada
+- 'Tomate, lechuga, perejil, pepinillo, zuchinni' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Lechuga, tomate, zanahoria, pimiento, rabano' sin receta asociada
+- 'Tomate, lechuga, perejil, pepinillo, zuchinni' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Lechuga, tomate, zanahoria, pimiento, rabano' sin receta asociada
+- 'Tomate, lechuga, perejil, pepinillo, zuchinni' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Lechuga, tomate, zanahoria, pimiento, rabano' sin receta asociada
+- 'Jugo de tamarindo' sin receta asociada
+- 'Jugo de tamarindo' sin receta asociada
+- 'Jugo de tamarindo' sin receta asociada
+- 'Limonada-mandarina' sin receta asociada
+- 'Jugo hawaiano' sin receta asociada
+- 'Limonada-mandarina' sin receta asociada
+- 'Jugo hawaiano' sin receta asociada
+- 'Limonada-mandarina' sin receta asociada
+- 'Jugo hawaiano' sin receta asociada
+- 'Galleta de vainilla' sin receta asociada
+- 'Sopa oriental' sin receta asociada
+- 'Sopa oriental' sin receta asociada
+- 'Hamburguesa (P/T)' sin receta asociada
+- 'Hamburguesa (P/T)' sin receta asociada
+- 'Hamburguesa (P/T)' sin receta asociada
+- 'Pollo brosterizado' sin receta asociada
+- 'Pollo brosterizado' sin receta asociada
+- 'Pollo brosterizado' sin receta asociada
+- 'Fideo codito salteado' sin receta asociada
+- 'Fideo codito salteado' sin receta asociada
+- 'Fideo codito salteado' sin receta asociada
+- 'Té de limón con fresas' sin receta asociada
+- 'Té de limón con fresas' sin receta asociada
+- 'Té de limón con fresas' sin receta asociada
+- 'Mousse de limón' sin receta asociada
+- 'Sopa de bolas de verde' sin receta asociada
+- 'Sopa de patas de res' sin receta asociada
+- 'Guatita criolla' sin receta asociada
+- 'Guatita criolla' sin receta asociada
+- 'Lechuga, tomate, zanahoria, pimiento, rabano' sin receta asociada
+- 'Tomate, lechuga, perejil, pepinillo, zuchinni' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano, aguacate' sin receta asociada
+- 'Lechuga, tomate, zanahoria, pimiento, rabano' sin receta asociada
+- 'Tomate, lechuga, perejil, pepinillo, zuchinni' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano, aguacate' sin receta asociada
+- 'Sopa de bolas de verde' sin receta asociada
+- 'Papa dorada a las finas hierbas' sin receta asociada
+- 'Papa dorada a las finas hierbas' sin receta asociada
+- 'Tomate cebolla zanahoria rabano perejil remolacha' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Tomate cebolla zanahoria rabano perejil remolacha' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Chuleta al ajillo' sin receta asociada
+- 'Chuleta al ajillo' sin receta asociada
+- 'Chuleta al ajillo' sin receta asociada
+- 'Yuca frita' sin receta asociada
+- 'Yuca frita' sin receta asociada
+- 'Yuca frita' sin receta asociada
+- 'Papa chaucha salteada' sin receta asociada
+- 'Papa chaucha salteada' sin receta asociada
+- 'Papa chaucha salteada' sin receta asociada
+- 'Aguacate cebolla zanahoria melloco perejil pimientos' sin receta asociada
+- 'Ensalada César tocino ahumado aguacate cebolla vainita' sin receta asociada
+- 'Aguacate cebolla zanahoria melloco perejil pimientos' sin receta asociada
+- 'Ensalada César tocino ahumado aguacate cebolla vainita' sin receta asociada
+- 'Aguacate cebolla zanahoria melloco perejil pimientos' sin receta asociada
+- 'Ensalada César tocino ahumado aguacate cebolla vainita' sin receta asociada
+- 'Té de manzana cedrón' sin receta asociada
+- 'Té de manzana cedrón' sin receta asociada
+- 'Té de manzana cedrón' sin receta asociada
+- 'Sopa de fideo cabello de ángel' sin receta asociada
+- 'Sopa de fideo cabello de ángel' sin receta asociada
+- 'Chuleta al ajillo' sin receta asociada
+- 'Pollo acuyado' sin receta asociada
+- 'Chuleta al ajillo' sin receta asociada
+- 'Pollo acuyado' sin receta asociada
+- 'Chuleta al ajillo' sin receta asociada
+- 'Pollo acuyado' sin receta asociada
+- 'Spaguetti salteado' sin receta asociada
+- 'Spaguetti salteado' sin receta asociada
+- 'Spaguetti salteado' sin receta asociada
+- 'Palillos de verde' sin receta asociada
+- 'Palillos de verde' sin receta asociada
+- 'Palillos de verde' sin receta asociada
+- 'Chocho col morada pepinillo Albahaca berenjena palmito' sin receta asociada
+- 'Choclo apio rabano tomate habas frescas pimientos lechuga' sin receta asociada
+- 'Aguacate cebolla vainita lechuga' sin receta asociada
+- 'Aceituna choclo dulce rábano acelga nabo pimiento' sin receta asociada
+- 'Chocho col morada pepinillo Albahaca berenjena palmito' sin receta asociada
+- 'Choclo apio rabano tomate habas frescas pimientos lechuga' sin receta asociada
+- 'Aguacate cebolla vainita lechuga' sin receta asociada
+- 'Aceituna choclo dulce rábano acelga nabo pimiento' sin receta asociada
+- 'Chocho col morada pepinillo Albahaca berenjena palmito' sin receta asociada
+- 'Choclo apio rabano tomate habas frescas pimientos lechuga' sin receta asociada
+- 'Aguacate cebolla vainita lechuga' sin receta asociada
+- 'Aceituna choclo dulce rábano acelga nabo pimiento' sin receta asociada
+- 'Jugo hawaiano' sin receta asociada
+- 'Jugo hawaiano' sin receta asociada
+- 'Jugo hawaiano' sin receta asociada
+- 'Galleta de vainilla' sin receta asociada
+- 'Galleta de vainilla' sin receta asociada
+- 'Sancocho de res criollo' sin receta asociada
+- 'Sancocho de res criollo' sin receta asociada
+- 'Aguacate-maduro' sin receta asociada
+- 'Patacón en salsa atomatada' sin receta asociada
+- 'Aguacate-maduro' sin receta asociada
+- 'Patacón en salsa atomatada' sin receta asociada
+- 'Aguacate-maduro' sin receta asociada
+- 'Patacón en salsa atomatada' sin receta asociada
+- 'Tomate cebolla zanahoria rabano perejil' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Tomate cebolla zanahoria rabano perejil' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Tomate cebolla zanahoria rabano perejil' sin receta asociada
+- 'Tomate, cebolla colorada, zanahoria, perejil, rabano' sin receta asociada
+- 'Jugo de tamarindo' sin receta asociada
+- 'Jugo de tamarindo' sin receta asociada
+- 'Jugo de tamarindo' sin receta asociada
+- 'Galleta de chocolate' sin receta asociada
+- 'Guagua de pan' sin receta asociada
+- 'Guagua de pan' sin receta asociada
+- 'Galleta de chocolate' sin receta asociada
+- 'Guagua de pan' sin receta asociada
+- 'Guagua de pan' sin receta asociada
+- 'Sopa de bolas de verde-res' sin receta asociada
+- 'Caldo de Bolas de Verde' sin receta asociada
+- 'Corvina a la Plancha' sin receta asociada
+- 'Corvina a la Plancha' sin receta asociada
+- 'Corvina a la Plancha' sin receta asociada
+- 'Mote guisado' sin receta asociada
+- 'Llapingacho (Tortilla de papa)' sin receta asociada
+- 'Guiso de Garbanzo' sin receta asociada
+- 'Llapingacho (Tortilla de papa)' sin receta asociada
+- 'Guiso de Garbanzo' sin receta asociada
+- 'Llapingacho (Tortilla de papa)' sin receta asociada
+- 'Guiso de Garbanzo' sin receta asociada
+- 'Ensalada Arcoíris (Zanahoria, Choclo, Arveja)' sin receta asociada
+- 'Ensalada Arcoíris (Zanahoria, Choclo, Arveja)' sin receta asociada
+- 'Ensalada Arcoíris (Zanahoria, Choclo, Arveja)' sin receta asociada
+- 'Té de Jamaica helado' sin receta asociada
+- 'Té de Jamaica helado' sin receta asociada
+- 'Té de Jamaica helado' sin receta asociada
+- 'Torta marmoleada' sin receta asociada
+- 'Torta marmoleada' sin receta asociada
+- 'Galleta chispas de chocolate' sin receta asociada
+- 'Sancocho de Res' sin receta asociada
+- 'Arroz de Cebada con Verduras y cerdo' sin receta asociada
+- 'Sancocho de Res' sin receta asociada
+- 'Arroz de Cebada con Verduras y cerdo' sin receta asociada
+- 'Chuleta a la Plancha al Chimichurri' sin receta asociada
+- 'Ceviche mixto' sin receta asociada
+- 'Chuleta a la Plancha al Chimichurri' sin receta asociada
+- 'Ceviche mixto' sin receta asociada
+- 'Chuleta a la Plancha al Chimichurri' sin receta asociada
+- 'Ceviche mixto' sin receta asociada
+- 'Patacones Crujientes' sin receta asociada
+- 'Maduro al horno' sin receta asociada
+- 'Patacones Crujientes' sin receta asociada
+- 'Maduro al horno' sin receta asociada
+- 'Patacones Crujientes' sin receta asociada
+- 'Maduro al horno' sin receta asociada
+- 'Ensalada Verde (Lechuga, Pepino y Limón)' sin receta asociada
+- 'Ensalada de Choclo, Queso y Cilantro' sin receta asociada
+- 'Ensalada Verde (Lechuga, Pepino y Limón)' sin receta asociada
+- 'Ensalada de Choclo, Queso y Cilantro' sin receta asociada
+- 'Ensalada Verde (Lechuga, Pepino y Limón)' sin receta asociada
+- 'Ensalada de Choclo, Queso y Cilantro' sin receta asociada
+- 'Torta mojada de Chocolate' sin receta asociada
+- 'Bizcocho marmoleado' sin receta asociada
+- 'Aplanchados' sin receta asociada
+- 'Torta mojada de Chocolate' sin receta asociada
+- 'Bizcocho marmoleado' sin receta asociada
+- 'Menestron' sin receta asociada
+- 'Albóndigas en salsa pomodoro' sin receta asociada
+- 'Bastones de zanahorias y zuchinni al horno' sin receta asociada
+- 'Frijoles-maduro-arepa' sin receta asociada
+- 'Lechuga, tomate, pimiento, habas frescas, perejil' sin receta asociada
+- 'Jugo de tamarindo' sin receta asociada
+- 'Encebollado de pescado' sin receta asociada
+- 'Ají de carne' sin receta asociada
+- … y 11 más
+
+## Productos duplicados en catálogo
+
+- 'QUESO PARMESANO 100 GR' repetido (código 262 vs 63)
+- 'FIDEO TORNILLO 400 GR - EL ARTESANAL' repetido (código 331 vs 62)
+
+## Recetas con base cost > $2.00 (revisar origen)
+
+- 'POSTRE MASA/TORTA MARMOLEAD DE MORA Y VAINILLA' base 4.2932 > $2.00 (revisar bloques de origen)
+- 'PUDÍN DE MANZANA 45 GRAMOS' base 3.0650 > $2.00 (revisar bloques de origen)
+
+## Recetas repetidas con ingredientes distintos
+
+- 'ARROZ/35 GRAMOS' aparece con ingredientes distintos (bloque 2)
+- 'ARROZ/35 GRAMOS' aparece con ingredientes distintos (bloque 3)
+- 'PURÉ DE YUCA /60 GRAMOS' aparece con ingredientes distintos (bloque 2)
+- 'MOUSSE DE MANGO 45 GRAMOS' aparece con ingredientes distintos (bloque 2)
+- 'JAMAICA 8 ONZAS' aparece con ingredientes distintos (bloque 2)
+- 'CHIPS DE YUCA -60 GRAMOS' aparece con ingredientes distintos (bloque 2)
+- 'ARROZ/35 GRAMOS' aparece con ingredientes distintos (bloque 2)
+- 'ARROZ/35 GRAMOS' aparece con ingredientes distintos (bloque 3)
+- 'PURÉ DE YUCA /60 GRAMOS' aparece con ingredientes distintos (bloque 2)
+- 'MOUSSE DE MANGO 45 GRAMOS' aparece con ingredientes distintos (bloque 2)
+- 'JAMAICA 8 ONZAS' aparece con ingredientes distintos (bloque 2)
+- 'CHIPS DE YUCA -60 GRAMOS' aparece con ingredientes distintos (bloque 2)
+
+## Recetas sin factor de porciones (PROMEDIOS)
+
+- 'PURÉ DE ZANAHORIAS/60GR' sin factor de porciones (PROMEDIOS)
+- 'DEDITOS DE YUCA/60GR' sin factor de porciones (PROMEDIOS)
+- 'PECHUGA DE POLLO/110GR' sin factor de porciones (PROMEDIOS)
+- 'LOMO A LA PLANCHA EN SALSA DE LIMON/110 GR' sin factor de porciones (PROMEDIOS)
+- 'POSTRE MASA/TORTA MARMOLEAD DE MORA Y VAINILLA' sin factor de porciones (PROMEDIOS)
+- 'FRUTA/piña 45GR' sin factor de porciones (PROMEDIOS)
+- 'JUGO PAPAYA /8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'TÉ/FRUTOS ROJOS' sin factor de porciones (PROMEDIOS)
+- 'AJÍ/BASE /80pax' sin factor de porciones (PROMEDIOS)
+- 'SHAWARMA DE POLLO/110GR' sin factor de porciones (PROMEDIOS)
+- 'HUMUS GARBANZO/GUARNICIÓN/60GR' sin factor de porciones (PROMEDIOS)
+- 'LASAÑA DE CARNE /110GR' sin factor de porciones (PROMEDIOS)
+- 'PAN DE AJO /GUARNICIÓN/60GR' sin factor de porciones (PROMEDIOS)
+- 'SOPA CHINA/12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'ARROZ/35 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PESCADO A LA PLANCHA/110 GR' sin factor de porciones (PROMEDIOS)
+- 'POLLO AL CURRY /110' sin factor de porciones (PROMEDIOS)
+- 'CROQUETA DE MADURO 60 GR' sin factor de porciones (PROMEDIOS)
+- 'MENESTRA DE LENTEJA 60 GR' sin factor de porciones (PROMEDIOS)
+- 'Té de cedrón con manzana verde/8 onzas' sin factor de porciones (PROMEDIOS)
+- 'Consomé de pollo 12 onzas' sin factor de porciones (PROMEDIOS)
+- 'CERDO EN SALSA DE TAMARINDO 110 GR' sin factor de porciones (PROMEDIOS)
+- 'PARILLADA DE RES CHORIZO /110 GR' sin factor de porciones (PROMEDIOS)
+- 'PAPA FRANCESA/ 60 GR' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE MORA 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'TÉ DE MORA Y HIERBALUISA/8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'LOCRO DE ACELGA CON QUESO/12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'GELATINA DE FRAMBUESA/45 GR' sin factor de porciones (PROMEDIOS)
+- 'GUINEO/ FRUTA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'SEMANA 2 / DEL 31-08-2026 AL 04-09-2026' sin factor de porciones (PROMEDIOS)
+- 'POLLO BROASTER 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'YUCA AL VAPOR 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PAPA FRANCESA 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PEPINILLO PIMIENTO VERDE TOMATE RIÑON ZANAHORIA ZUCCHINI VERDE FRÉJOL TIERNO' sin factor de porciones (PROMEDIOS)
+- 'Jugo de guanábana' sin factor de porciones (PROMEDIOS)
+- 'Jugo de piña' sin factor de porciones (PROMEDIOS)
+- 'Galleta de avena' sin factor de porciones (PROMEDIOS)
+- 'Pera' sin factor de porciones (PROMEDIOS)
+- 'Sopa de fideo codito queso' sin factor de porciones (PROMEDIOS)
+- 'Pollo al horno' sin factor de porciones (PROMEDIOS)
+- 'Albahaca berenjena palmito lechuga tomate' sin factor de porciones (PROMEDIOS)
+- 'Jugo de maracuyá' sin factor de porciones (PROMEDIOS)
+- 'SOPA -AJIACO BOGOTANO 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'Camarones rebozados 110 GR' sin factor de porciones (PROMEDIOS)
+- 'Apio pimiento zanahoria aguacate palmito tomate' sin factor de porciones (PROMEDIOS)
+- 'BABACO 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE MANGO 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'Crema de zanahoria canguil' sin factor de porciones (PROMEDIOS)
+- 'Lomo apanado' sin factor de porciones (PROMEDIOS)
+- 'Maduro frito' sin factor de porciones (PROMEDIOS)
+- 'Lechuga palmito fresco tomate cherry rábano zanahoria zucchini' sin factor de porciones (PROMEDIOS)
+- 'Jugo de naranja' sin factor de porciones (PROMEDIOS)
+- 'Jugo Tropical' sin factor de porciones (PROMEDIOS)
+- 'Orito' sin factor de porciones (PROMEDIOS)
+- 'Verduras salteadas' sin factor de porciones (PROMEDIOS)
+- 'Papa chaucha al perejil' sin factor de porciones (PROMEDIOS)
+- 'Chocho col morada pepinillo cebolla tomate cilantro' sin factor de porciones (PROMEDIOS)
+- 'ENSALADA DE FRUTAS /45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Limonada' sin factor de porciones (PROMEDIOS)
+- 'TORTA SELVA NEGRA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Sopa de avena con cerdo' sin factor de porciones (PROMEDIOS)
+- 'Mix de mariscos rebosados' sin factor de porciones (PROMEDIOS)
+- 'Churrasco de lomo / 110 gr' sin factor de porciones (PROMEDIOS)
+- 'Hamburguesa BBQ /110 gr' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE NARANJILLA 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE MORA -BABACO  8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'TORTA FRESA 45G' sin factor de porciones (PROMEDIOS)
+- 'PAPAYA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Sopa de verduras con pollo' sin factor de porciones (PROMEDIOS)
+- 'PAPAS CON CUERO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'LASAÑA DE ATÚN 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PAPA AL VAPOR /MOTE' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE PIÑA 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'BROWNIE 45 GR' sin factor de porciones (PROMEDIOS)
+- 'UVAS 45 GR' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE QUINUA CON POLLO 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'BURRITO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'POLLO AL HORNO A LA NARANJA 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'TOSTITOS DE MAIZ 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'BASTONES DE VERDE EN SALSA ATOMATADA' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE TAXO DE 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'GRANADILLA UNIDAD /45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Crema de tomate-canguil' sin factor de porciones (PROMEDIOS)
+- 'SECO DE POLLO /110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PURÉ DE YUCA /60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'MADURO AL VAPOR /60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PURÉ DE YUCA /60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'SANCOCHO BLANCO 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CARIUCHO DE POLLO 110G' sin factor de porciones (PROMEDIOS)
+- 'CERDO EN SALSA BBQ 110 G' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE LENTEJAS 12 ONZAS /HUESO' sin factor de porciones (PROMEDIOS)
+- 'SALÓN EN SALSA DE CHAMPIÑONES 110 G' sin factor de porciones (PROMEDIOS)
+- 'LOMO DE RES SALTEADO CON VERDURAS 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'POLLO ATOMATADO 110 G' sin factor de porciones (PROMEDIOS)
+- 'ESTIRONES DE VERDE 60 G' sin factor de porciones (PROMEDIOS)
+- 'FIDEO TORNILLO MANTEQUILLA Y PEREJIL 60 G' sin factor de porciones (PROMEDIOS)
+- 'TORTA DE CHOCOLATE CON ZUCHINNI 45 G' sin factor de porciones (PROMEDIOS)
+- 'CERDO A LA PLANCHA 110 G' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE BOLAS DE MAÍZ  12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CHULETA DE CERDO 110 G' sin factor de porciones (PROMEDIOS)
+- 'CORVINA EN SALSA DE CAMARON 110 G' sin factor de porciones (PROMEDIOS)
+- 'VEGETALES 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'JUGO LIMÓN MANDARINA /8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'SOPA AGUADO DE CARNE 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'ALBONDIGAS AL PESTO 110 G' sin factor de porciones (PROMEDIOS)
+- 'CHIPS PAPA/YUCA /CAMOTE 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'MOUSSE DE MANGO 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'MOUSSE DE MANGO 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PERA EN ALMIBAR 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE ARROZ DE CEBADA CON POLLO  12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CEVICHE DE PESCADO Y CAMARÓN 110' sin factor de porciones (PROMEDIOS)
+- 'CHIPS DE YUCA 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'CANGUIL TOSTADO 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Lechuga, fréjol, tomate, pimiento verde 42 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'JAMAICA 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'TORTA DE MADURO 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE MOROCHO 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'PERNIL CRIOLLO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'TORTILLA DE PAPA 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Acelga, choclo, pimiento rojo, tomate' sin factor de porciones (PROMEDIOS)
+- 'PESCADO AL AJILLO 110' sin factor de porciones (PROMEDIOS)
+- 'Medallón de pollo con verduras 110 G' sin factor de porciones (PROMEDIOS)
+- 'CHIFLES 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Aguacate, cebolla, vainita, rabano, zanahoria, zucchini' sin factor de porciones (PROMEDIOS)
+- 'Te de mora-hierbaluisa 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'POZOLE 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CAZUELA DE PESCADO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'AMBATEÑITO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PALMERAS DE VERDE 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'Aguacate, lechuga, tomate, remolacha, melloco 45 gramos' sin factor de porciones (PROMEDIOS)
+- 'CREMA DE POLLO - CANGUIL 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'HAMBURGUESA PQ CON PAN  110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'COLESLAW - LECHUGA -TOMATE' sin factor de porciones (PROMEDIOS)
+- 'BOLOÑESA 110 G' sin factor de porciones (PROMEDIOS)
+- 'HUEVO COCIDO 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'POLLO A LA JARDINERA 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'CHOCLO PORCION 65 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'GELATINA FRAMBUESA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE VERDURAS 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE ALBONDIGAS 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'MILANESA DE POLLO 110 GR' sin factor de porciones (PROMEDIOS)
+- 'PAPA AL HORNO CON CREMA 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'BROCOLI GARBANZO PIMIENTO ALBAHACA PALMITO TOMATE' sin factor de porciones (PROMEDIOS)
+- 'PAPA AL VAPOR -60 GR' sin factor de porciones (PROMEDIOS)
+- 'PUDÍN DE MANZANA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'apio pepinillo tomate mayonesa remolacha zanahoria' sin factor de porciones (PROMEDIOS)
+- 'LOMO AGRIDULCE 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'CONSOME BRUNOISE 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CHAULAFAN ESPECIAL 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'WANTAN FRITO 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'AREPA BALNCA DE 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE MANZANA 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'NARANJA UNIDAD /FRUTA' sin factor de porciones (PROMEDIOS)
+- 'CHOCLO ACEITUNA RABANO LECHUGA RABANO PIMIENTO' sin factor de porciones (PROMEDIOS)
+- 'BUÑUELOS CON MIEL 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'DURAZNOS FRUTA' sin factor de porciones (PROMEDIOS)
+- 'Parrillada de res -chorizo' sin factor de porciones (PROMEDIOS)
+- 'PAPA AL VAPOR -CHOCLO 60 G' sin factor de porciones (PROMEDIOS)
+- 'ENSALADA DE FRUTAS-45 G' sin factor de porciones (PROMEDIOS)
+- 'COLADA MORADA DE 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'GUAGUA DE PAN UNIDAD DE 50 GRAMOS -ALMUERZOS' sin factor de porciones (PROMEDIOS)
+- 'HORNADO CRIOLLO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'MOTE SALTEADO -MARGARINA' sin factor de porciones (PROMEDIOS)
+- 'CURTIDO DE CEBOLLA TOMATE Y CILANTRO' sin factor de porciones (PROMEDIOS)
+- 'BABACO EN ALMIBAR 45 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'SANCOCHO DE PESCADO 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'SECO DE POLLO A LA NARANJILLA 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'CHIPS DE YUCA -60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'ENSALADA DE REPOLLO -ZANAHORIAS-CILANTRO' sin factor de porciones (PROMEDIOS)
+- 'JUGO DE SANDÍA 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'MEDALLON DE POLLO EN SALSA DE CHAMPIÑON -110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'BROCOLI REBOSADOS -60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'SOPA DE CEBOLLA CON QUESO GRATINADO-12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CHULETA DE CERDO AL CHIMICHURRI-110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'FRICASSEE DE POLLO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'PATACON DE VERDE 60 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'LIMONADA DE HIERBA BUENA /8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'GELATINA DE FRAMBUESA- JUGO 8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CORVINA EN SALSA DE COCO 110 GR' sin factor de porciones (PROMEDIOS)
+- 'LOCRO DE PAPA CON QUESO 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CAUCARA TRADICIONAL RES -110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'GRANOLA-YOGURT NATURAL -ENSALADA DE FRUTAS' sin factor de porciones (PROMEDIOS)
+- 'MELON-JUGO DE NARANJILLA-TORTILLA DE CHOCLO' sin factor de porciones (PROMEDIOS)
+- 'PIÑA-JUGO GUANABANA-TORTILLA DE VERDE' sin factor de porciones (PROMEDIOS)
+- 'MANDARINA-JUGO DE MORA-CHOCHO TOSTADO' sin factor de porciones (PROMEDIOS)
+- 'DURAZNOS-JUGO DE PIÑA -AREPA DE CARNE' sin factor de porciones (PROMEDIOS)
+
+## Semanas duplicadas / renumeradas
+
+- 2026-10-12: etiqueta 'SEMANA 7' renumerada a SEMANA 8
+- 2026-10-19: etiqueta 'SEMANA 8' renumerada a SEMANA 9
+- 2026-10-26: etiqueta 'SEMANA 9' renumerada a SEMANA 10
+- 2026-11-02: etiqueta 'SEMANA 10' renumerada a SEMANA 11
+- 2026-11-09: etiqueta 'SEMANA 11' renumerada a SEMANA 12
+- 2026-11-16: etiqueta 'SEMANA 12' renumerada a SEMANA 13
+- 2026-11-23: etiqueta 'SEMANA 13' renumerada a SEMANA 14
+- 2026-11-30: etiqueta 'SEMANA 14' renumerada a SEMANA 15
+
+## Validación vs base del pie origen (peores 20)
+
+- POSTRE MASA/TORTA MARMOLEAD DE MORA Y VAINILLA: 3873.3% (mio=4.293237 origen=0.108051)
+- PUDÍN DE MANZANA 45 GRAMOS: 2279.0% (mio=3.064994 origen=0.128837)
+- TÉ/FRUTOS ROJOS: 1717.5% (mio=0.609524 origen=0.033536)
+- Té de cedrón con manzana verde/8 onzas: 954.0% (mio=0.954562 origen=0.090568)
+- MENESTRA DE LENTEJA 60 GR: 831.4% (mio=1.505384 origen=0.161623)
+- Lomo apanado: 783.4% (mio=0.927671 origen=0.105010)
+- Galleta de avena: 696.7% (mio=0.513726 origen=0.064482)
+- BISTEC CRIOLLO 110 GRAMOS: 434.2% (mio=0.745634 origen=0.139575)
+- GELATINA FRAMBUESA 45 GRAMOS: 424.0% (mio=0.059052 origen=0.011270)
+- MOUSSE DE MANGO 45 GRAMOS: 285.5% (mio=0.526800 origen=0.136666)
+- BUDÍN DE COCO 45 GRAMOS: 170.7% (mio=0.202178 origen=0.074685)
+- Churrasco de lomo / 110 gr: 163.3% (mio=0.563830 origen=0.214173)
+- MOTE SALTEADO -MARGARINA: 116.7% (mio=0.231156 origen=0.106663)
+- CANGUIL TOSTADO 60 GRAMOS: 66.0% (mio=0.141502 origen=0.085252)
+- JUGO DE TAXO DE 12 ONZAS: 55.9% (mio=0.135917 origen=0.308250)
+- SHAWARMA DE POLLO/110GR: 48.5% (mio=0.655078 origen=0.441000)
+- SOPA DE MOROCHO 12 ONZAS: 46.9% (mio=0.246126 origen=0.463862)
+- SOPA DE QUINUA CON POLLO 12 ONZAS: 46.4% (mio=0.316200 origen=0.215941)
+- PARILLADA DE RES CHORIZO /110 GR: 45.0% (mio=0.701068 origen=1.274794)
+- BROCOLI GARBANZO PIMIENTO ALBAHACA PALMITO TOMATE: 40.7% (mio=0.086204 origen=0.061259)
+
+## Valores inválidos en menú
+
+- 2026-09-21 ALMUERZO_2 FRUTA: '0'
+- 2026-09-22 ALMUERZO_2 FRUTA: '0'
+
+## Varianza cantidad de presentación receta vs catálogo
+
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'ARROZ MACAREÑO ARROBA': receta 11325.0 vs catálogo 9988.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'POLLO PECHUGA LB': receta 453.0 vs catálogo 1.0
+- 'CEBOLLA COLORADA LB': receta 1000.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 4000.0 vs catálogo 454.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'TE DE FRUTOS ROJOS': receta 25.0 vs catálogo 1.0
+- 'OREGANO LB': receta 200.0 vs catálogo 454.0
+- 'SAL YODADA 1 KL': receta 100.0 vs catálogo 1000.0
+- 'OREGANO LB': receta 200.0 vs catálogo 454.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'POLLO PECHUGA LB': receta 453.0 vs catálogo 1.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'QUESO MOZZARELLA 2.2': receta 2200.0 vs catálogo 1000.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'LECHUGA NACIONAL': receta 3000.0 vs catálogo 4540.0
+- 'ARROZ MACAREÑO ARROBA': receta 11325.0 vs catálogo 9988.0
+- 'ARROZ MACAREÑO ARROBA': receta 11325.0 vs catálogo 9988.0
+- 'ANIS ESTRELLADO LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'SALSA CHINA ORIENTAL 200 ML': receta 1000.0 vs catálogo 200.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'ARROZ MACAREÑO ARROBA': receta 11325.0 vs catálogo 9988.0
+- 'SAL YODADA 1 KL': receta 200.0 vs catálogo 1000.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'MADURO KG RACIMO MEDIANO 5 kg': receta 6000.0 vs catálogo 5000.0
+- 'APANADURA LB - LA ORIGINAL': receta 500.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'OREGANO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'PEREJIL500 GR': receta 453.0 vs catálogo 500.0
+- 'TE DE CEDRON 25 unidades': receta 25.0 vs catálogo 1.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'ARROZ MACAREÑO ARROBA': receta 11325.0 vs catálogo 9988.0
+- 'AZUCAR ARROBA SAN FRANCISCO': receta 1000.0 vs catálogo 11340.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'LOMO PULPA AGUJA KG': receta 500.0 vs catálogo 1000.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'APIO/800 GR': receta 2200.0 vs catálogo 800.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'LECHUGA NACIONAL': receta 4000.0 vs catálogo 4540.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'NARANJA PQ/8UNIDADES': receta 10.0 vs catálogo 1.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'QUESO FRESCO 450': receta 450.0 vs catálogo 1000.0
+- 'APIO/800 GR': receta 1000.0 vs catálogo 800.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'CEBOLLA COLORADA LB': receta 500.0 vs catálogo 1.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'FREJOL TIERNO ROJO LB': receta 453.0 vs catálogo 1000.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'LECHUGA NACIONAL': receta 6000.0 vs catálogo 4540.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'MANI PASTA LB': receta 500.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CILANTRO X 400 GR': receta 1000.0 vs catálogo 400.0
+- 'LOMO PULA REDONDA KG': receta 7000.0 vs catálogo 1000.0
+- 'APANADURA LB - LA ORIGINAL': receta 500.0 vs catálogo 454.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'OREGANO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'FREJOL TIERNO ROJO LB': receta 453.0 vs catálogo 1000.0
+- 'AVENA HOJUELAS LB': receta 1000.0 vs catálogo 454.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'HUEVOS 60 GR / CUBETA': receta 1800.0 vs catálogo 30.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'QUESO FRESCO 450': receta 450.0 vs catálogo 1000.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'OREGANO LB': receta 200.0 vs catálogo 454.0
+- 'LAUREL HOJA 25 GR': receta 200.0 vs catálogo 25.0
+- 'LECHUGA NACIONAL': receta 4000.0 vs catálogo 4540.0
+- 'AZUCAR ARROBA SAN FRANCISCO': receta 25000.0 vs catálogo 11340.0
+- 'AZUCAR ARROBA SAN FRANCISCO': receta 25000.0 vs catálogo 11340.0
+- 'SANDIA': receta 4000.0 vs catálogo 5000.0
+- 'POLLO PECHUGA LB': receta 453.0 vs catálogo 1.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'PAPA CHAUCHA LB': receta 453.0 vs catálogo 1.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'AGUACATE/UNIDAD': receta 1000.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'LOMO PULA REDONDA KG': receta 7000.0 vs catálogo 1000.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'APANADURA LB - LA ORIGINAL': receta 500.0 vs catálogo 454.0
+- 'LECHUGA NACIONAL': receta 4000.0 vs catálogo 4540.0
+- 'ALITAS DE POLLO LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'APANADURA LB - LA ORIGINAL': receta 500.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'PIMIENTO VERDE 1 LB': receta 1000.0 vs catálogo 454.0
+- 'PAPA CHAUCHA LB': receta 453.0 vs catálogo 1.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'SANDIA': receta 4000.0 vs catálogo 5000.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'SAL YODADA 1 KL': receta 50000.0 vs catálogo 1000.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'LOMO PULA REDONDA KG': receta 7000.0 vs catálogo 1000.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'SALSA BBQ DE 200 GR - EASEY': receta 1000.0 vs catálogo 200.0
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': receta 50000.0 vs catálogo 20000.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'MANI PASTA LB': receta 500.0 vs catálogo 454.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'OREGANO LB': receta 200.0 vs catálogo 454.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'QUESO MOZZARELLA 2.2': receta 2200.0 vs catálogo 1000.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'QUESO FRESCO 450': receta 450.0 vs catálogo 1000.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'MARGARINA INDUSTRIAL LB - DANEC': receta 453.0 vs catálogo 1.0
+- 'QUINUA LB': receta 1000.0 vs catálogo 454.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'PIMIENTA LB': receta 1000.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'ACHIOTE LIQUIDO 200 ML': receta 1000.0 vs catálogo 200.0
+- 'QUESO FRESCO 450': receta 450.0 vs catálogo 1000.0
+- 'COMINO LB': receta 200.0 vs catálogo 454.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'NARANJA PQ/8UNIDADES': receta 10.0 vs catálogo 1.0
+- 'CEBOLLA COLORADA LB': receta 453.0 vs catálogo 1.0
+- 'AZUCAR ARROBA SAN FRANCISCO': receta 1000.0 vs catálogo 11340.0
+- 'PAPA CHOLA QQ': receta 50000.0 vs catálogo 45400.0
+- … y 167 más
+
+## Varianza de precio receta vs catálogo
+
+- 'CEBOLLA BLANCA 1 KILO': PVP receta 0.85 vs catálogo 0.75
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'ACEITE 1 LT': PVP receta 1.73 vs catálogo 1.91
+- 'ACEITE 1 LT': PVP receta 1.73 vs catálogo 1.91
+- 'PIMIENTA LB': PVP receta 4.0 vs catálogo 1.16
+- 'AZUCAR ARROBA SAN FRANCISCO': PVP receta 9.74 vs catálogo 13.5
+- 'HUEVOS 60 GR / CUBETA': PVP receta 3.2 vs catálogo 3.85
+- 'MARGARINA INDUSTRIAL LB - DANEC': PVP receta 0.79 vs catálogo 0.93
+- 'MORA': PVP receta 1.76 vs catálogo 1.17647059
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'PIMIENTA LB': PVP receta 4.0 vs catálogo 1.16
+- 'CEBOLLA BLANCA 1 KILO': PVP receta 0.85 vs catálogo 0.75
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': PVP receta 31.9 vs catálogo 35.6
+- 'POLLO PECHUGA LB': PVP receta 1.7 vs catálogo 1.85
+- 'TORTILLA TRIGO SUAVES MAMA FANY 400 GR': PVP receta 2.11 vs catálogo 2.3
+- 'TOMATE RIÑON 1 KILO': PVP receta 0.5892 vs catálogo 1.2
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': PVP receta 31.9 vs catálogo 35.6
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': PVP receta 31.9 vs catálogo 35.6
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'TOMATE RIÑON 1 KILO': PVP receta 0.9 vs catálogo 1.2
+- 'MARGARINA INDUSTRIAL LB - DANEC': PVP receta 0.79 vs catálogo 0.93
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': PVP receta 31.9 vs catálogo 35.6
+- 'MARGARINA INDUSTRIAL LB - DANEC': PVP receta 0.79 vs catálogo 0.93
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'TOMATE RIÑON 1 KILO': PVP receta 0.5892 vs catálogo 1.2
+- 'AZUCAR ARROBA SAN FRANCISCO': PVP receta 9.74 vs catálogo 13.5
+- 'PIMIENTA LB': PVP receta 4.0 vs catálogo 1.16
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': PVP receta 31.9 vs catálogo 35.6
+- 'MARGARINA INDUSTRIAL LB - DANEC': PVP receta 0.79 vs catálogo 0.93
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'PIMIENTA LB': PVP receta 4.0 vs catálogo 1.16
+- 'TOMATE RIÑON 1 KILO': PVP receta 0.5892857143 vs catálogo 1.2
+- 'CERDO DESHUESADO 1 KILO': PVP receta 5.75 vs catálogo 5.06
+- 'AJO LB': PVP receta 2.0 vs catálogo 1.5
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': PVP receta 32.33 vs catálogo 35.6
+- 'SAL YODADA 1 KL': PVP receta 0.28 vs catálogo 0.49
+- 'PIMIENTA LB': PVP receta 4.0 vs catálogo 1.16
+- 'CEBOLLA COLORADA LB': PVP receta 0.3 vs catálogo 0.34
+- 'COMINO LB': PVP receta 1.6 vs catálogo 1.31
+- 'ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO': PVP receta 32.33 vs catálogo 35.6
+- 'CEBOLLA COLORADA LB': PVP receta 0.28 vs catálogo 0.34
+- 'AJO LB': PVP receta 4.0 vs catálogo 1.5
+- 'SAL YODADA 1 KL': PVP receta 0.3 vs catálogo 0.49
+- 'PIMIENTA LB': PVP receta 1.58 vs catálogo 1.16
+- 'TOMATE RIÑON 1 KILO': PVP receta 0.5892 vs catálogo 1.2
+- 'TOMATE RIÑON 1 KILO': PVP receta 0.9 vs catálogo 1.2
+- 'TOMATE RIÑON 1 KILO': PVP receta 0.5892 vs catálogo 1.2
+- 'LOMO PULA REDONDA KG': PVP receta 0.4 vs catálogo 8.33
+- 'FIDEO TORNILLO 400 GR - EL ARTESANAL': PVP receta 0.4 vs catálogo 0.45
+- 'PEREJIL500 GR': PVP receta 3.0 vs catálogo 0.5
+- 'SALSA DE OSTRAS 200 GR': PVP receta 1.58 vs catálogo 2.25
+- 'CHOCLO DESGRANADO LB': PVP receta 1.5 vs catálogo 1.0
+
+## Validación de costos base vs hoja origen (pie de bloque)
+
+- n=247, mediana 0.47%, p75 8.59%, p90 30.80% | ≤2%: 149, ≤5%: 176, ≤10%: 190, ≤20%: 213
+
+### Peores 20 desvíos
+
+- POSTRE MASA/TORTA MARMOLEAD DE MORA Y VAINILLA: 3873.3% (mio=4.293237 origen=0.108051)
+- PUDÍN DE MANZANA 45 GRAMOS: 2279.0% (mio=3.064994 origen=0.128837)
+- TÉ/FRUTOS ROJOS: 1717.5% (mio=0.609524 origen=0.033536)
+- Té de cedrón con manzana verde/8 onzas: 954.0% (mio=0.954562 origen=0.090568)
+- MENESTRA DE LENTEJA 60 GR: 831.4% (mio=1.505384 origen=0.161623)
+- Lomo apanado: 783.4% (mio=0.927671 origen=0.105010)
+- Galleta de avena: 696.7% (mio=0.513726 origen=0.064482)
+- BISTEC CRIOLLO 110 GRAMOS: 434.2% (mio=0.745634 origen=0.139575)
+- GELATINA FRAMBUESA 45 GRAMOS: 424.0% (mio=0.059052 origen=0.011270)
+- MOUSSE DE MANGO 45 GRAMOS: 285.5% (mio=0.526800 origen=0.136666)
+- BUDÍN DE COCO 45 GRAMOS: 170.7% (mio=0.202178 origen=0.074685)
+- Churrasco de lomo / 110 gr: 163.3% (mio=0.563830 origen=0.214173)
+- MOTE SALTEADO -MARGARINA: 116.7% (mio=0.231156 origen=0.106663)
+- CANGUIL TOSTADO 60 GRAMOS: 66.0% (mio=0.141502 origen=0.085252)
+- JUGO DE TAXO DE 12 ONZAS: 55.9% (mio=0.135917 origen=0.308250)
+- SHAWARMA DE POLLO/110GR: 48.5% (mio=0.655078 origen=0.441000)
+- SOPA DE MOROCHO 12 ONZAS: 46.9% (mio=0.246126 origen=0.463862)
+- SOPA DE QUINUA CON POLLO 12 ONZAS: 46.4% (mio=0.316200 origen=0.215941)
+- PARILLADA DE RES CHORIZO /110 GR: 45.0% (mio=0.701068 origen=1.274794)
+- BROCOLI GARBANZO PIMIENTO ALBAHACA PALMITO TOMATE: 40.7% (mio=0.086204 origen=0.061259)
+
+## Referencias del informe del cliente
+
+- `BISTEC CRIOLLO 110 GRAMOS`: total $0.8053 vs referencia $0.70 → DESCUADRE
+- `AMBATEÑITO 110 GRAMOS`: total $0.3460 vs referencia $0.30 → OK
+- `AMBATEÑITO/CHORIZO/HUEVO`: total $0.3849 vs referencia $0.30 → DESCUADRE
