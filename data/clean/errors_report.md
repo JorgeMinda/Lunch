@@ -1,12 +1,13 @@
 # Reporte de errores — Fase 1 (limpieza y normalización)
 
-- Fecha de ejecución: 2026-11-13T02:14:25
+- Fecha de ejecución: 2026-11-13T05:51:10
 - Catálogo: 458 ingredientes únicos
 - Recetas: 252 únicas (257 apariciones)
 - Ítems de receta: 1560
 - Menú: 30 ciclos, 71 días, 1362 platos
 - Perfiles de costo: 4
 - Totales con regla ×1.08 aplicada: sí
+- Nota: RECETA_SIN_PORCIONES cuenta recetas ÚNICAS (207 = 202 ALMUERZO + 5 REFRIGERIO; en apariciones ALMUERZO sería 247 − 40 = 207)
 
 ## Resumen por tipo de incidencia
 
@@ -17,6 +18,7 @@
 | CATALOGO_DUPLICADO | 2 |
 | CATALOGO_MATCH_FUZZY | 1 |
 | CATALOGO_SIN_CANTIDAD | 5 |
+| GRAMAJE_FUERA_PERFIL | 102 |
 | INGREDIENTE_SIN_CATALOGO | 13 |
 | MENU_COBERTURA | 1 |
 | MENU_FILAS_ROTAS | 1 |
@@ -26,10 +28,10 @@
 | PRECIO_VARIA | 54 |
 | RECETA_COSTO_ATIPICO | 2 |
 | RECETA_DUPLICADA_DIFERENTE | 12 |
-| RECETA_SIN_PORCIONES | 186 |
+| RECETA_SIN_PORCIONES | 207 |
 | RECETA_UNIDAD_DIFIERE | 260 |
-| REFERENCIA_CLIENTE_DESCUADRE | 2 |
-| VALIDACION_VS_ORIGEN | 20 |
+| REFERENCIA_CLIENTE_DESCUADRE | 1 |
+| VALIDACION_VS_ORIGEN | 4 |
 
 ## Catálogo sin cantidad de presentación
 
@@ -49,7 +51,6 @@
 
 ## Descuadre vs valores de referencia del cliente
 
-- 'BISTEC CRIOLLO 110 GRAMOS': total 0.8053 vs 0.7
 - 'AMBATEÑITO/CHORIZO/HUEVO': total 0.3849 vs 0.3
 
 ## Emparejamientos difusos (revisar manualmente)
@@ -59,6 +60,111 @@
 ## Filas rotas (#REF!) descartadas
 
 - 146 filas #REF! ignoradas al final de la hoja
+
+## Gramaje por porción fuera del estándar del perfil (±10%)
+
+- Pechuga de pollo [PROTEINA] (receta PECHUGA-DE-POLLO-110GR): 126 g vs estándar 100 g (+26.0%)
+- Shawarma pollo [PROTEINA] (receta SHAWARMA-DE-POLLO-110GR): 154 g vs estándar 100 g (+54.3%)
+- Pescado a la plancha [PROTEINA] (receta PESCADO-A-LA-PLANCHA-110-GR): 129 g vs estándar 100 g (+29.0%)
+- Cerdo en salsa de tamarindo [PROTEINA] (receta CERDO-EN-SALSA-DE-TAMARINDO-110-GR): 144 g vs estándar 100 g (+44.0%)
+- Ambateñito/Chorizo/huevo/tortilla de papa [PROTEINA] (receta AMBATENITO-CHORIZO-HUEVO): 62 g vs estándar 100 g (-38.0%)
+- Lomo a la plancha en salsa al limón [PROTEINA] (receta LOMO-A-LA-PLANCHA-EN-SALSA-DE-LIMON-110-GR): 21 g vs estándar 100 g (-79.0%)
+- Lasaña de carne [PROTEINA] (receta LASANA-DE-CARNE-110GR): 42 g vs estándar 100 g (-58.0%)
+- Pollo al curry [PROTEINA] (receta POLLO-AL-CURRY-110): 127 g vs estándar 100 g (+27.0%)
+- Parillada de res con chorizo [PROTEINA] (receta PARILLADA-DE-RES-CHORIZO-110-GR): 123 g vs estándar 100 g (+23.0%)
+- Camarones apanados [PROTEINA] (receta CAMARONES-APANADOS-110-GR): 146 g vs estándar 100 g (+46.0%)
+- Puré de zanahorias [GUARNICION] (receta PURE-DE-ZANAHORIAS-60GR): 74 g vs estándar 50 g (+47.4%)
+- Humus -garbanzo [GUARNICION] (receta HUMUS-GARBANZO-GUARNICION-60GR): 7 g vs estándar 50 g (-86.0%)
+- Menestra de lenteja [GUARNICION] (receta MENESTRA-DE-LENTEJA-60-GR): 69 g vs estándar 50 g (+38.0%)
+- Papa fracesa [GUARNICION] (receta PAPA-FRANCESA-60-GR): 62 g vs estándar 50 g (+24.0%)
+- Llapingachos [GUARNICION] (receta LLAPINGACHOS-60GR): 73 g vs estándar 50 g (+46.0%)
+- Pan de ajo [GUARNICION] (receta PAN-DE-AJO-GUARNICION-60GR): 15 g vs estándar 50 g (-70.0%)
+- Croqueta de maduro [GUARNICION] (receta CROQUETA-DE-MADURO-60-GR): 44 g vs estándar 50 g (-12.0%)
+- Menestra de fréjol [GUARNICION] (receta MENESTRA-DE-FREJOL-60-GR): 60 g vs estándar 50 g (+20.8%)
+- Tomate/ lechuga/vainita/zanahoria/apio [ENSALADA] (receta TOMATE-LECHUGA-VAINITA-ZANAHORIA-APIO): 28 g vs estándar 55 g (-49.1%)
+- Aguacate, lechuga, zanahoria, remolacha,tomate [ENSALADA] (receta ENSALADA-AGUACATE-LECHUGA-ZANAHORIA-REMOLACHA-TOMATE-42-GR): 30 g vs estándar 55 g (-45.5%)
+- Piña [FRUTA] (receta FRUTA-PINA-45GR): 45 g vs estándar 37 g (+21.6%)
+- Fresas [FRUTA] (receta FRESAS-45GR): 45 g vs estándar 37 g (+21.6%)
+- MELÓN [FRUTA] (receta MELON-45-GR): 45 g vs estándar 37 g (+21.6%)
+- Guineo [FRUTA] (receta GUINEO-FRUTA-45-GRAMOS): 45 g vs estándar 37 g (+21.6%)
+- Bistec criollo [PROTEINA] (receta BISTEC-CRIOLLO-110-GRAMOS): 110 g vs estándar 100 g (+10.5%)
+- Pollo al horno [PROTEINA] (receta POLLO-AL-HORNO): 130 g vs estándar 100 g (+30.0%)
+- Camarones rebozados [PROTEINA] (receta CAMARONES-REBOZADOS-110-GR): 134 g vs estándar 100 g (+34.5%)
+- Lomo apanado [PROTEINA] (receta LOMO-APANADO): 134 g vs estándar 100 g (+34.0%)
+- Alitas BBQ [PROTEINA] (receta ALITAS-BBQ): 136 g vs estándar 100 g (+36.0%)
+- Cerdo al pomodoro [PROTEINA] (receta CERDO-AL-POMODORO): 209 g vs estándar 100 g (+108.6%)
+- Albóndigas atomatadas [PROTEINA] (receta ALBONDIGAS-ATOMATADAS): 130 g vs estándar 100 g (+30.0%)
+- Yuca al vapor [GUARNICION] (receta YUCA-AL-VAPOR-60-GRAMOS): 62 g vs estándar 50 g (+24.0%)
+- Maduro frito [GUARNICION] (receta MADURO-FRITO): 60 g vs estándar 50 g (+20.0%)
+- Spagutti [GUARNICION] (receta SPAGUTTI): 61 g vs estándar 50 g (+22.6%)
+- Papa chaucha al perejil [GUARNICION] (receta PAPA-CHAUCHA-AL-PEREJIL): 76 g vs estándar 50 g (+52.0%)
+- Pepinillo pimiento tomate zanahoria zucchini frejol [ENSALADA] (receta PEPINILLO-PIMIENTO-VERDE-TOMATE-RINON-ZANAHORIA-ZUCCHINI-VER): 42 g vs estándar 55 g (-23.6%)
+- Apio pimiento zanahoria aguacate palmito tomate [ENSALADA] (receta APIO-PIMIENTO-ZANAHORIA-AGUACATE-PALMITO-TOMATE): 36 g vs estándar 55 g (-35.5%)
+- Lechuga palmito fresco tomate cherry rábano zanahoria zucchini [ENSALADA] (receta LECHUGA-PALMITO-FRESCO-TOMATE-CHERRY-RABANO-ZANAHORIA-ZUCCHI): 72 g vs estándar 55 g (+30.8%)
+- Chocho col morada pepinillo cebolla tomate cilantro [ENSALADA] (receta CHOCHO-COL-MORADA-PEPINILLO-CEBOLLA-TOMATE-CILANTRO): 48 g vs estándar 55 g (-12.7%)
+- Sandia [FRUTA] (receta SANDIA-45-GRAMOS): 45 g vs estándar 37 g (+21.6%)
+- Papas con cuero [PROTEINA] (receta PAPAS-CON-CUERO-110-GRAMOS): 149 g vs estándar 100 g (+49.0%)
+- Fritada de cerdo [PROTEINA] (receta FRITADA-DE-CERDO-110-GRAMOS): 127 g vs estándar 100 g (+27.0%)
+- Burrito de carne [PROTEINA] (receta BURRITO-110-GRAMOS): 150 g vs estándar 100 g (+50.3%)
+- Churrasco de lomo+ HUEVO FRITO [PROTEINA] (receta CHURRASCO-DE-POLLO-HUEVO-FRITO-110-G): 58 g vs estándar 100 g (-42.0%)
+- Lasaña de atun [PROTEINA] (receta LASANA-DE-ATUN-110-GRAMOS): 114 g vs estándar 100 g (+14.0%)
+- Hamburguesa en salsa BBQ [PROTEINA] (receta HAMBURGUESA-BBQ-110-GR): 4 g vs estándar 100 g (-96.0%)
+- Pollo al horno en salsa a la naranja [PROTEINA] (receta POLLO-AL-HORNO-A-LA-NARANJA-110-GRAMOS): 126 g vs estándar 100 g (+26.0%)
+- Seco de pollo [PROTEINA] (receta SECO-DE-POLLO-110-GRAMOS): 125 g vs estándar 100 g (+25.0%)
+- Maduro al vapor [GUARNICION] (receta MADURO-AL-VAPOR-60-GRAMOS): 60 g vs estándar 50 g (+20.0%)
+- Uvas [FRUTA] (receta UVAS-45-GR): 45 g vs estándar 37 g (+21.6%)
+- Ensalada de frutas [FRUTA] (receta ENSALADA-DE-FRUTAS-45-GRAMOS): 45 g vs estándar 37 g (+21.6%)
+- Cariucho de pollo [PROTEINA] (receta CARIUCHO-DE-POLLO-110G): 118 g vs estándar 100 g (+18.0%)
+- Cerdo a la plancha [PROTEINA] (receta CERDO-A-LA-PLANCHA-110-G): 119 g vs estándar 100 g (+19.0%)
+- Cerdo en salsa BBQ [PROTEINA] (receta CERDO-EN-SALSA-BBQ-110-G): 121 g vs estándar 100 g (+21.0%)
+- Pollo atomatado [PROTEINA] (receta POLLO-ATOMATADO-110-G): 126 g vs estándar 100 g (+26.0%)
+- Lomo al chimichurri [PROTEINA] (receta LOMO-AL-CHIMICHURRI-110-G): 120 g vs estándar 100 g (+20.2%)
+- Corvina en salsa de camarón [PROTEINA] (receta CORVINA-EN-SALSA-DE-CAMARON-110-G): 116 g vs estándar 100 g (+16.0%)
+- Fideo tornillo mantequilla perejil [GUARNICION] (receta FIDEO-TORNILLO-MANTEQUILLA-Y-PEREJIL-60-G): 66 g vs estándar 50 g (+32.0%)
+- Vegetales salteados [GUARNICION] (receta VEGETALES-60-GRAMOS): 60 g vs estándar 50 g (+20.0%)
+- Estirones de verde [GUARNICION] (receta ESTIRONES-DE-VERDE-60-G): 100 g vs estándar 50 g (+100.0%)
+- Chips de papa/yuca/camote [GUARNICION] (receta CHIPS-PAPA-YUCA-CAMOTE-60-GRAMOS): 60 g vs estándar 50 g (+20.0%)
+- Pera en almibar [FRUTA] (receta PERA-EN-ALMIBAR-45-GRAMOS): 12 g vs estándar 37 g (-67.6%)
+- Pernil criollo [PROTEINA] (receta PERNIL-CRIOLLO-110-GRAMOS): 121 g vs estándar 100 g (+21.0%)
+- Pescado al ajillo [PROTEINA] (receta PESCADO-AL-AJILLO-110): 132 g vs estándar 100 g (+32.0%)
+- Cazuela de pescado [PROTEINA] (receta CAZUELA-DE-PESCADO-110-GRAMOS): 119 g vs estándar 100 g (+19.0%)
+- Ceviche de pescado y camarón [PROTEINA] (receta CEVICHE-DE-PESCADO-Y-CAMARON-110): 141 g vs estándar 100 g (+41.0%)
+- Medallón de pollo con verduras [PROTEINA] (receta MEDALLON-DE-POLLO-CON-VERDURAS-110-G): 113 g vs estándar 100 g (+13.0%)
+- Chips de yuca [GUARNICION] (receta CHIPS-DE-YUCA-60-GRAMOS): 61 g vs estándar 50 g (+22.0%)
+- Chifles [GUARNICION] (receta CHIFLES-60-GRAMOS): 72 g vs estándar 50 g (+44.0%)
+- Palmeras de verde [GUARNICION] (receta PALMERAS-DE-VERDE-60-GRAMOS): 60 g vs estándar 50 g (+20.0%)
+- Huevo frito [GUARNICION] (receta CHURRASCO-DE-POLLO-HUEVO-FRITO-110-G): 58 g vs estándar 50 g (+16.0%)
+- Lechuga, fréjol, tomate, pimiento verde [ENSALADA] (receta LECHUGA-FREJOL-TOMATE-PIMIENTO-VERDE-42-GRAMOS): 47 g vs estándar 55 g (-14.5%)
+- Aguacate, cebolla, vainita, rabano, zanahoria, zucchini [ENSALADA] (receta AGUACATE-CEBOLLA-VAINITA-RABANO-ZANAHORIA-ZUCCHINI): 36 g vs estándar 55 g (-34.0%)
+- Aguacate, lechuga, tomate, remolacha, melloco [ENSALADA] (receta AGUACATE-LECHUGA-TOMATE-REMOLACHA-MELLOCO-45-GRAMOS): 33 g vs estándar 55 g (-40.0%)
+- Milanesa de pollo [PROTEINA] (receta MILANESA-DE-POLLO-110-GR): 116 g vs estándar 100 g (+16.0%)
+- Spaghetti boloñesa [PROTEINA] (receta BOLONESA-110-G): 113 g vs estándar 100 g (+13.0%)
+- Papa al horno con crema [GUARNICION] (receta PAPA-AL-HORNO-CON-CREMA-60-GRAMOS): 68 g vs estándar 50 g (+36.0%)
+- Brócoli garbanzo pimiento albahaca palmito tomate [ENSALADA] (receta BROCOLI-GARBANZO-PIMIENTO-ALBAHACA-PALMITO-TOMATE): 49 g vs estándar 55 g (-10.9%)
+- Lomo agridulce [PROTEINA] (receta LOMO-AGRIDULCE-110-GRAMOS): 127 g vs estándar 100 g (+27.0%)
+- Pollo a la jardinera [PROTEINA] (receta POLLO-A-LA-JARDINERA-110-GRAMOS): 137 g vs estándar 100 g (+37.0%)
+- Chaulafán [PROTEINA] (receta CHAULAFAN-ESPECIAL-110-GRAMOS): 138 g vs estándar 100 g (+38.0%)
+- Mote, maduro [GUARNICION] (receta MOTE-MADURO-60-GRAMOS): 60 g vs estándar 50 g (+20.0%)
+- Wantán frito salsa tamarindo [GUARNICION] (receta WANTAN-FRITO-60-GRAMOS): 60 g vs estándar 50 g (+20.0%)
+- Papa al vapor-choclo [GUARNICION] (receta PAPA-AL-VAPOR-CHOCLO-60-G): 40 g vs estándar 50 g (-20.0%)
+- Hornado Criollo de Cerdo [PROTEINA] (receta HORNADO-CRIOLLO-110-GRAMOS): 123 g vs estándar 100 g (+23.0%)
+- Seco de Pollo a la Naranjilla [PROTEINA] (receta SECO-DE-POLLO-A-LA-NARANJILLA-110-GRAMOS): 146 g vs estándar 100 g (+45.6%)
+- Medallón de Pollo en Salsa de Champriñones [PROTEINA] (receta MEDALLON-DE-POLLO-EN-SALSA-DE-CHAMPINON-110-GRAMOS): 135 g vs estándar 100 g (+35.0%)
+- Mote Salteado [GUARNICION] (receta MOTE-SALTEADO-MARGARINA): 112 g vs estándar 50 g (+124.0%)
+- Curtido de Tomate y Cebolla [ENSALADA] (receta CURTIDO-DE-CEBOLLA-TOMATE-Y-CILANTRO): 35 g vs estándar 55 g (-36.4%)
+- Ensalada de Repollo y Zanahoria [ENSALADA] (receta ENSALADA-DE-REPOLLO-ZANAHORIAS-CILANTRO): 41 g vs estándar 55 g (-25.3%)
+- Babaco en Almíbar [FRUTA] (receta BABACO-EN-ALMIBAR-45-GRAMOS): 54 g vs estándar 37 g (+45.9%)
+- Fricassée de Pollo [PROTEINA] (receta FRICASSEE-DE-POLLO-110-GRAMOS): 114 g vs estándar 100 g (+14.1%)
+- Caucara Tradicional [PROTEINA] (receta CAUCARA-TRADICIONAL-RES-110-GRAMOS): 119 g vs estándar 100 g (+19.0%)
+- Ensalada cesar [ENSALADA] (receta PERA-JUGO-DE-NARANJA-ENSALADA-CESAR): 136 g vs estándar 55 g (+147.3%)
+- Frutillas [FRUTA] (receta FRUTILLAS-CHOCOLATE-FRIOS-TORTA-DE-NARANJA): 97 g vs estándar 37 g (+162.2%)
+- Pollo al horno en salsa cremosa [PROTEINA] (receta POLLO-EN-SALSA-CREMOSA-110-GRAMOS): 129 g vs estándar 100 g (+29.0%)
+- Croquetas de atún especial [PROTEINA] (receta CROQUETA-DE-ATUN-DE-110-GRAMOS-ESPECIAL): 123 g vs estándar 100 g (+23.0%)
+- Suprema de pollo [PROTEINA] (receta SUPREMA-DE-POLLO-110-GRAMOS): 122 g vs estándar 100 g (+22.0%)
+- Puré de papa [GUARNICION] (receta PURE-DE-PAPA-60-GRAMOS): 58 g vs estándar 50 g (+17.0%)
+- Majado de verde [GUARNICION] (receta MAJADO-DE-VERDE-60-GR): 70 g vs estándar 50 g (+40.0%)
+- Pepinillo-tomate-cebolla-pimiento-lechuga [ENSALADA] (receta PEPINILLO-TOMATE-CEBOLLA-PIMIENTO-LECHUGA-42-GR): 45 g vs estándar 55 g (-18.2%)
+- Chuleta al chimichurri [PROTEINA] (receta CHULETA-DE-CERDO-AL-CHIMICHURRI-110-GRAMOS): 26 g vs estándar 100 g (-74.0%)
 
 ## Ingredientes de receta sin correspondencia en catálogo
 
@@ -486,8 +592,8 @@
 
 ## Productos duplicados en catálogo
 
-- 'QUESO PARMESANO 100 GR' repetido (código 262 vs 63)
-- 'FIDEO TORNILLO 400 GR - EL ARTESANAL' repetido (código 331 vs 62)
+- 'QUESO PARMESANO 100 GR': cód 63 $1.54 vs cód 262 $1.59 → gana el precio máximo (cód 262)
+- 'FIDEO TORNILLO 400 GR - EL ARTESANAL': cód 331 $0.4 vs cód 62 $0.45 → gana el precio máximo (cód 62)
 
 ## Recetas con base cost > $2.00 (revisar origen)
 
@@ -511,6 +617,7 @@
 
 ## Recetas sin factor de porciones (PROMEDIOS)
 
+- 'SOPA DE CHIFLES/12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'PURÉ DE ZANAHORIAS/60GR' sin factor de porciones (PROMEDIOS)
 - 'DEDITOS DE YUCA/60GR' sin factor de porciones (PROMEDIOS)
 - 'PECHUGA DE POLLO/110GR' sin factor de porciones (PROMEDIOS)
@@ -520,24 +627,35 @@
 - 'JUGO PAPAYA /8 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'TÉ/FRUTOS ROJOS' sin factor de porciones (PROMEDIOS)
 - 'AJÍ/BASE /80pax' sin factor de porciones (PROMEDIOS)
+- 'VINAGRETA/BASE/80pax' sin factor de porciones (PROMEDIOS)
 - 'SHAWARMA DE POLLO/110GR' sin factor de porciones (PROMEDIOS)
 - 'HUMUS GARBANZO/GUARNICIÓN/60GR' sin factor de porciones (PROMEDIOS)
 - 'LASAÑA DE CARNE /110GR' sin factor de porciones (PROMEDIOS)
 - 'PAN DE AJO /GUARNICIÓN/60GR' sin factor de porciones (PROMEDIOS)
+- 'ENSALADA /42GR' sin factor de porciones (PROMEDIOS)
+- 'ARROZ/35 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'FLAN DE CARAMELO/45 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'SOPA CHINA/12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'ARROZ/35 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'PESCADO A LA PLANCHA/110 GR' sin factor de porciones (PROMEDIOS)
 - 'POLLO AL CURRY /110' sin factor de porciones (PROMEDIOS)
 - 'CROQUETA DE MADURO 60 GR' sin factor de porciones (PROMEDIOS)
 - 'MENESTRA DE LENTEJA 60 GR' sin factor de porciones (PROMEDIOS)
+- 'ENSALADA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'Té de cedrón con manzana verde/8 onzas' sin factor de porciones (PROMEDIOS)
+- 'MUFFIN DE VAINILLA 45 GR' sin factor de porciones (PROMEDIOS)
 - 'Consomé de pollo 12 onzas' sin factor de porciones (PROMEDIOS)
 - 'CERDO EN SALSA DE TAMARINDO 110 GR' sin factor de porciones (PROMEDIOS)
 - 'PARILLADA DE RES CHORIZO /110 GR' sin factor de porciones (PROMEDIOS)
 - 'PAPA FRANCESA/ 60 GR' sin factor de porciones (PROMEDIOS)
+- 'CHOCLO AL VAPOR/60 GR' sin factor de porciones (PROMEDIOS)
 - 'JUGO DE MORA 8 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'TÉ DE MORA Y HIERBALUISA/8 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'POSTRE MASA/TORTA DE NARANJA 45 GR' sin factor de porciones (PROMEDIOS)
 - 'LOCRO DE ACELGA CON QUESO/12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'AMBATEÑITO/CHORIZO/HUEVO' sin factor de porciones (PROMEDIOS)
+- 'LLAPINGACHOS/60GR' sin factor de porciones (PROMEDIOS)
+- 'ENSALADA/Aguacate, lechuga, zanahoria, remolacha,tomate/42 GR' sin factor de porciones (PROMEDIOS)
 - 'GELATINA DE FRAMBUESA/45 GR' sin factor de porciones (PROMEDIOS)
 - 'GUINEO/ FRUTA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'SEMANA 2 / DEL 31-08-2026 AL 04-09-2026' sin factor de porciones (PROMEDIOS)
@@ -551,8 +669,10 @@
 - 'Pera' sin factor de porciones (PROMEDIOS)
 - 'Sopa de fideo codito queso' sin factor de porciones (PROMEDIOS)
 - 'Pollo al horno' sin factor de porciones (PROMEDIOS)
+- 'Cerdo al pomodoro' sin factor de porciones (PROMEDIOS)
 - 'Albahaca berenjena palmito lechuga tomate' sin factor de porciones (PROMEDIOS)
 - 'Jugo de maracuyá' sin factor de porciones (PROMEDIOS)
+- 'Jugo de tomate de árbol' sin factor de porciones (PROMEDIOS)
 - 'SOPA -AJIACO BOGOTANO 12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'Camarones rebozados 110 GR' sin factor de porciones (PROMEDIOS)
 - 'Apio pimiento zanahoria aguacate palmito tomate' sin factor de porciones (PROMEDIOS)
@@ -565,6 +685,7 @@
 - 'Jugo de naranja' sin factor de porciones (PROMEDIOS)
 - 'Jugo Tropical' sin factor de porciones (PROMEDIOS)
 - 'Orito' sin factor de porciones (PROMEDIOS)
+- 'Alitas BBQ' sin factor de porciones (PROMEDIOS)
 - 'Verduras salteadas' sin factor de porciones (PROMEDIOS)
 - 'Papa chaucha al perejil' sin factor de porciones (PROMEDIOS)
 - 'Chocho col morada pepinillo cebolla tomate cilantro' sin factor de porciones (PROMEDIOS)
@@ -582,6 +703,7 @@
 - 'Sopa de verduras con pollo' sin factor de porciones (PROMEDIOS)
 - 'PAPAS CON CUERO 110 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'LASAÑA DE ATÚN 110 GRAMOS' sin factor de porciones (PROMEDIOS)
+- 'REPE LOJANO 12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'PAPA AL VAPOR /MOTE' sin factor de porciones (PROMEDIOS)
 - 'JUGO DE PIÑA 12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'BROWNIE 45 GR' sin factor de porciones (PROMEDIOS)
@@ -601,6 +723,7 @@
 - 'SANCOCHO BLANCO 12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'CARIUCHO DE POLLO 110G' sin factor de porciones (PROMEDIOS)
 - 'CERDO EN SALSA BBQ 110 G' sin factor de porciones (PROMEDIOS)
+- 'CROQUETAS DE YUCA 60 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'SOPA DE LENTEJAS 12 ONZAS /HUESO' sin factor de porciones (PROMEDIOS)
 - 'SALÓN EN SALSA DE CHAMPIÑONES 110 G' sin factor de porciones (PROMEDIOS)
 - 'LOMO DE RES SALTEADO CON VERDURAS 110 GRAMOS' sin factor de porciones (PROMEDIOS)
@@ -609,6 +732,7 @@
 - 'FIDEO TORNILLO MANTEQUILLA Y PEREJIL 60 G' sin factor de porciones (PROMEDIOS)
 - 'TORTA DE CHOCOLATE CON ZUCHINNI 45 G' sin factor de porciones (PROMEDIOS)
 - 'CERDO A LA PLANCHA 110 G' sin factor de porciones (PROMEDIOS)
+- 'LOMO AL CHIMICHURRI 110 G' sin factor de porciones (PROMEDIOS)
 - 'SOPA DE BOLAS DE MAÍZ  12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'CHULETA DE CERDO 110 G' sin factor de porciones (PROMEDIOS)
 - 'CORVINA EN SALSA DE CAMARON 110 G' sin factor de porciones (PROMEDIOS)
@@ -644,13 +768,16 @@
 - 'CREMA DE POLLO - CANGUIL 12 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'HAMBURGUESA PQ CON PAN  110 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'COLESLAW - LECHUGA -TOMATE' sin factor de porciones (PROMEDIOS)
+- 'BUDÍN DE COCO 45 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'BOLOÑESA 110 G' sin factor de porciones (PROMEDIOS)
 - 'HUEVO COCIDO 60 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'POLLO A LA JARDINERA 110 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'CHOCLO PORCION 65 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'GELATINA FRAMBUESA 45 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'SOPA DE VERDURAS 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'CHURRASCO DE POLLO + HUEVO FRITO 110 G' sin factor de porciones (PROMEDIOS)
 - 'SOPA DE ALBONDIGAS 12 ONZAS' sin factor de porciones (PROMEDIOS)
+- 'ESTIRONES DE VERDE 60 GRAMOSS' sin factor de porciones (PROMEDIOS)
 - 'MILANESA DE POLLO 110 GR' sin factor de porciones (PROMEDIOS)
 - 'PAPA AL HORNO CON CREMA 60 GRAMOS' sin factor de porciones (PROMEDIOS)
 - 'BROCOLI GARBANZO PIMIENTO ALBAHACA PALMITO TOMATE' sin factor de porciones (PROMEDIOS)
@@ -690,13 +817,7 @@
 - 'LIMONADA DE HIERBA BUENA /8 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'GELATINA DE FRAMBUESA- JUGO 8 ONZAS' sin factor de porciones (PROMEDIOS)
 - 'CORVINA EN SALSA DE COCO 110 GR' sin factor de porciones (PROMEDIOS)
-- 'LOCRO DE PAPA CON QUESO 12 ONZAS' sin factor de porciones (PROMEDIOS)
-- 'CAUCARA TRADICIONAL RES -110 GRAMOS' sin factor de porciones (PROMEDIOS)
-- 'GRANOLA-YOGURT NATURAL -ENSALADA DE FRUTAS' sin factor de porciones (PROMEDIOS)
-- 'MELON-JUGO DE NARANJILLA-TORTILLA DE CHOCLO' sin factor de porciones (PROMEDIOS)
-- 'PIÑA-JUGO GUANABANA-TORTILLA DE VERDE' sin factor de porciones (PROMEDIOS)
-- 'MANDARINA-JUGO DE MORA-CHOCHO TOSTADO' sin factor de porciones (PROMEDIOS)
-- 'DURAZNOS-JUGO DE PIÑA -AREPA DE CARNE' sin factor de porciones (PROMEDIOS)
+- … y 7 más
 
 ## Semanas duplicadas / renumeradas
 
@@ -709,28 +830,12 @@
 - 2026-11-23: etiqueta 'SEMANA 13' renumerada a SEMANA 14
 - 2026-11-30: etiqueta 'SEMANA 14' renumerada a SEMANA 15
 
-## Validación vs base del pie origen (peores 20)
+## Validación vs origen: desvíos >10% RESIDUALES (revisar pipeline)
 
-- POSTRE MASA/TORTA MARMOLEAD DE MORA Y VAINILLA: 3873.3% (mio=4.293237 origen=0.108051)
-- PUDÍN DE MANZANA 45 GRAMOS: 2279.0% (mio=3.064994 origen=0.128837)
-- TÉ/FRUTOS ROJOS: 1717.5% (mio=0.609524 origen=0.033536)
-- Té de cedrón con manzana verde/8 onzas: 954.0% (mio=0.954562 origen=0.090568)
-- MENESTRA DE LENTEJA 60 GR: 831.4% (mio=1.505384 origen=0.161623)
-- Lomo apanado: 783.4% (mio=0.927671 origen=0.105010)
-- Galleta de avena: 696.7% (mio=0.513726 origen=0.064482)
-- BISTEC CRIOLLO 110 GRAMOS: 434.2% (mio=0.745634 origen=0.139575)
-- GELATINA FRAMBUESA 45 GRAMOS: 424.0% (mio=0.059052 origen=0.011270)
-- MOUSSE DE MANGO 45 GRAMOS: 285.5% (mio=0.526800 origen=0.136666)
-- BUDÍN DE COCO 45 GRAMOS: 170.7% (mio=0.202178 origen=0.074685)
-- Churrasco de lomo / 110 gr: 163.3% (mio=0.563830 origen=0.214173)
-- MOTE SALTEADO -MARGARINA: 116.7% (mio=0.231156 origen=0.106663)
-- CANGUIL TOSTADO 60 GRAMOS: 66.0% (mio=0.141502 origen=0.085252)
-- JUGO DE TAXO DE 12 ONZAS: 55.9% (mio=0.135917 origen=0.308250)
-- SHAWARMA DE POLLO/110GR: 48.5% (mio=0.655078 origen=0.441000)
-- SOPA DE MOROCHO 12 ONZAS: 46.9% (mio=0.246126 origen=0.463862)
-- SOPA DE QUINUA CON POLLO 12 ONZAS: 46.4% (mio=0.316200 origen=0.215941)
-- PARILLADA DE RES CHORIZO /110 GR: 45.0% (mio=0.701068 origen=1.274794)
 - BROCOLI GARBANZO PIMIENTO ALBAHACA PALMITO TOMATE: 40.7% (mio=0.086204 origen=0.061259)
+- PURÉ DE YUCA /60 GRAMOS: 31.7% (mio=0.063859 origen=0.048490)
+- Sopa de verduras con pollo: 19.8% (mio=0.193366 origen=0.161466)
+- LLAPINGACHOS/60GR: 14.0% (mio=0.053729 origen=0.047142)
 
 ## Valores inválidos en menú
 
@@ -1001,32 +1106,86 @@
 ## Validación de costos base vs hoja origen (pie de bloque)
 
 - n=247, mediana 0.47%, p75 8.59%, p90 30.80% | ≤2%: 149, ≤5%: 176, ≤10%: 190, ≤20%: 213
+- Desvíos >10%: 57 → **explicados por errores del origen: 53** (el Excel dividió mal, precios cruzados o tecledos) | **residuales (revisar pipeline): 4**
 
-### Peores 20 desvíos
+### Residuales >10% (sin explicación en el origen — revisar)
 
-- POSTRE MASA/TORTA MARMOLEAD DE MORA Y VAINILLA: 3873.3% (mio=4.293237 origen=0.108051)
-- PUDÍN DE MANZANA 45 GRAMOS: 2279.0% (mio=3.064994 origen=0.128837)
-- TÉ/FRUTOS ROJOS: 1717.5% (mio=0.609524 origen=0.033536)
-- Té de cedrón con manzana verde/8 onzas: 954.0% (mio=0.954562 origen=0.090568)
-- MENESTRA DE LENTEJA 60 GR: 831.4% (mio=1.505384 origen=0.161623)
-- Lomo apanado: 783.4% (mio=0.927671 origen=0.105010)
-- Galleta de avena: 696.7% (mio=0.513726 origen=0.064482)
-- BISTEC CRIOLLO 110 GRAMOS: 434.2% (mio=0.745634 origen=0.139575)
-- GELATINA FRAMBUESA 45 GRAMOS: 424.0% (mio=0.059052 origen=0.011270)
-- MOUSSE DE MANGO 45 GRAMOS: 285.5% (mio=0.526800 origen=0.136666)
-- BUDÍN DE COCO 45 GRAMOS: 170.7% (mio=0.202178 origen=0.074685)
-- Churrasco de lomo / 110 gr: 163.3% (mio=0.563830 origen=0.214173)
-- MOTE SALTEADO -MARGARINA: 116.7% (mio=0.231156 origen=0.106663)
-- CANGUIL TOSTADO 60 GRAMOS: 66.0% (mio=0.141502 origen=0.085252)
-- JUGO DE TAXO DE 12 ONZAS: 55.9% (mio=0.135917 origen=0.308250)
-- SHAWARMA DE POLLO/110GR: 48.5% (mio=0.655078 origen=0.441000)
-- SOPA DE MOROCHO 12 ONZAS: 46.9% (mio=0.246126 origen=0.463862)
-- SOPA DE QUINUA CON POLLO 12 ONZAS: 46.4% (mio=0.316200 origen=0.215941)
-- PARILLADA DE RES CHORIZO /110 GR: 45.0% (mio=0.701068 origen=1.274794)
 - BROCOLI GARBANZO PIMIENTO ALBAHACA PALMITO TOMATE: 40.7% (mio=0.086204 origen=0.061259)
+- PURÉ DE YUCA /60 GRAMOS: 31.7% (mio=0.063859 origen=0.048490)
+- Sopa de verduras con pollo: 19.8% (mio=0.193366 origen=0.161466)
+- LLAPINGACHOS/60GR: 14.0% (mio=0.053729 origen=0.047142)
+
+### Explicados por errores del origen (muestra)
+
+- POSTRE MASA/TORTA MARMOLEAD DE MORA Y VAINILLA: 3873.3% (mio=4.293237 origen=0.108051 | AZUCAR ARROBA: Excel 0.0077 vs nuestro 0.0107)
+- PUDÍN DE MANZANA 45 GRAMOS: 2279.0% (mio=3.064994 origen=0.128837 | MANZANA PQ/ UNIDAD: Excel 0.0460 vs nuestro 2.9880)
+- TÉ/FRUTOS ROJOS: 1717.5% (mio=0.609524 origen=0.033536 | TE DE FRUTOS ROJOS: Excel 0.0240 vs nuestro 0.6000)
+- Té de cedrón con manzana verde/8 onzas: 954.0% (mio=0.954562 origen=0.090568 | TE DE CEDRON 25 unidades: Excel 0.0360 vs nuestro 0.9000)
+- MENESTRA DE LENTEJA 60 GR: 831.4% (mio=1.505384 origen=0.161623 | CEBOLLA COLORADA LB: Excel 0.0030 vs nuestro 1.3600)
+- Lomo apanado: 783.4% (mio=0.927671 origen=0.105010 | LOMO PULA REDONDA KG: Excel 0.0057 vs nuestro 0.8330)
+- Galleta de avena: 696.7% (mio=0.513726 origen=0.064482 | AVENA HOJUELAS LB: Excel 0.0063 vs nuestro 0.0139)
+- BISTEC CRIOLLO 110 GRAMOS: 434.2% (mio=0.745634 origen=0.139575 | PIMIENTA LB: Excel 0.0002 vs nuestro 0.0005)
+- GELATINA FRAMBUESA 45 GRAMOS: 424.0% (mio=0.059052 origen=0.011270 | GELATINA DE FRAMBUESA 400 GR: Excel 0.0053 vs nuestro 0.0531)
+- MOUSSE DE MANGO 45 GRAMOS: 285.5% (mio=0.526800 origen=0.136666 | TOMILLO 100 GR: Excel 0.0300 vs nuestro 0.3000)
+- BUDÍN DE COCO 45 GRAMOS: 170.7% (mio=0.202178 origen=0.074685 | COCO RALLADO 250 GR: Excel 0.0180 vs nuestro 0.0720)
+- Churrasco de lomo / 110 gr: 163.3% (mio=0.563830 origen=0.214173 | LOMO PULA REDONDA KG: Excel 0.0595 vs nuestro 0.4165)
+- MOTE SALTEADO -MARGARINA: 116.7% (mio=0.231156 origen=0.106663 | MOTE SECO NACIONAL LB: Excel 0.1045 vs nuestro 0.2302)
+- CANGUIL TOSTADO 60 GRAMOS: 66.0% (mio=0.141502 origen=0.085252 | MAIZ PARA TOSTADO 500G: Excel 0.0563 vs nuestro 0.1125)
+- JUGO DE TAXO DE 12 ONZAS: 55.9% (mio=0.135917 origen=0.308250 | AZUCAR ARROBA SAN FRANCISCO: Excel 0.1890 vs nuestro 0.0167)
+- SHAWARMA DE POLLO/110GR: 48.5% (mio=0.655078 origen=0.441000 | POLLO PECHUGA LB: Excel 0.1690 vs nuestro 0.3676)
+- SOPA DE MOROCHO 12 ONZAS: 46.9% (mio=0.246126 origen=0.463862 | PAPA CHOLA QQ: Excel 0.2360 vs nuestro 0.0260)
+- SOPA DE QUINUA CON POLLO 12 ONZAS: 46.4% (mio=0.316200 origen=0.215941 | QUINUA LB: Excel 0.0810 vs nuestro 0.1784)
+- PARILLADA DE RES CHORIZO /110 GR: 45.0% (mio=0.701068 origen=1.274794 | LOMO PULPA AGUJA KG: Excel 1.1120 vs nuestro 0.5560)
+- Té de hiebaluisa-naranja-manzana: 39.4% (mio=0.116005 origen=0.083208 | NARANJA PQ/8UNIDADES: Excel 0.0047 vs nuestro 0.0375)
 
 ## Referencias del informe del cliente
 
-- `BISTEC CRIOLLO 110 GRAMOS`: total $0.8053 vs referencia $0.70 → DESCUADRE
+- `BISTEC CRIOLLO 110 GRAMOS`: total $0.8053 | carne sola $0.7081 | referencia $0.70 → carne ≈ referencia; alcance del $0.70 (carne vs plato) POR CONFIRMAR con el cliente
 - `AMBATEÑITO 110 GRAMOS`: total $0.3460 vs referencia $0.30 → OK
 - `AMBATEÑITO/CHORIZO/HUEVO`: total $0.3849 vs referencia $0.30 → DESCUADRE
+
+## Totales tecleados (col L) vs Σ(F×H) — vista de requisiciones
+
+- líneas con L numérico: 74 | coinciden (≤1% o 1g): 66 | no coinciden: 8 (agrupación por nombre normalizado)
+- ACEITE CANECA 20 LT - VETOIL / SAN FRANCISCO: L=2960 vs Σ(F×H)=2310 (Δ=+650)
+- SAL YODADA 1 KL: L=1413 vs Σ(F×H)=1293 (Δ=+120)
+- AJO LB: L=945 vs Σ(F×H)=1035 (Δ=-90)
+- COMINO 200 GR: L=450 vs Σ(F×H)=120 (Δ=+330)
+- PIMIENTA 1 KL: L=267 vs Σ(F×H)=120 (Δ=+147)
+- PIMIENTO VERDE 1 LB: L=1185 vs Σ(F×H)=1305 (Δ=-120)
+- TOMATE RINON 1 KILO: L=3270 vs Σ(F×H)=3420 (Δ=-150)
+- CEBOLLA PERLA 1 KG: L=840 vs Σ(F×H)=960 (Δ=-120)
+
+## Gramajes por porción vs estándar del perfil estudiantil
+
+- comparaciones (receta × componente): 124 | fuera del estándar (±10%): 102 (perfil Almuerzo Saludable: proteína 100 g, guarnición 50 g, arroz 40 g; Refrigerio: 60/40 g)
+
+- Frutillas [FRUTA] (receta FRUTILLAS-CHOCOLATE-FRIOS-TORTA-DE-NARANJA): 97 g vs estándar 37 g (+162.2%)
+- Ensalada cesar [ENSALADA] (receta PERA-JUGO-DE-NARANJA-ENSALADA-CESAR): 136 g vs estándar 55 g (+147.3%)
+- Mote Salteado [GUARNICION] (receta MOTE-SALTEADO-MARGARINA): 112 g vs estándar 50 g (+124.0%)
+- Cerdo al pomodoro [PROTEINA] (receta CERDO-AL-POMODORO): 209 g vs estándar 100 g (+108.6%)
+- Estirones de verde [GUARNICION] (receta ESTIRONES-DE-VERDE-60-G): 100 g vs estándar 50 g (+100.0%)
+- Hamburguesa en salsa BBQ [PROTEINA] (receta HAMBURGUESA-BBQ-110-GR): 4 g vs estándar 100 g (-96.0%)
+- Humus -garbanzo [GUARNICION] (receta HUMUS-GARBANZO-GUARNICION-60GR): 7 g vs estándar 50 g (-86.0%)
+- Lomo a la plancha en salsa al limón [PROTEINA] (receta LOMO-A-LA-PLANCHA-EN-SALSA-DE-LIMON-110-GR): 21 g vs estándar 100 g (-79.0%)
+- Chuleta al chimichurri [PROTEINA] (receta CHULETA-DE-CERDO-AL-CHIMICHURRI-110-GRAMOS): 26 g vs estándar 100 g (-74.0%)
+- Pan de ajo [GUARNICION] (receta PAN-DE-AJO-GUARNICION-60GR): 15 g vs estándar 50 g (-70.0%)
+- Pera en almibar [FRUTA] (receta PERA-EN-ALMIBAR-45-GRAMOS): 12 g vs estándar 37 g (-67.6%)
+- Lasaña de carne [PROTEINA] (receta LASANA-DE-CARNE-110GR): 42 g vs estándar 100 g (-58.0%)
+- Shawarma pollo [PROTEINA] (receta SHAWARMA-DE-POLLO-110GR): 154 g vs estándar 100 g (+54.3%)
+- Papa chaucha al perejil [GUARNICION] (receta PAPA-CHAUCHA-AL-PEREJIL): 76 g vs estándar 50 g (+52.0%)
+- Burrito de carne [PROTEINA] (receta BURRITO-110-GRAMOS): 150 g vs estándar 100 g (+50.3%)
+- Tomate/ lechuga/vainita/zanahoria/apio [ENSALADA] (receta TOMATE-LECHUGA-VAINITA-ZANAHORIA-APIO): 28 g vs estándar 55 g (-49.1%)
+- Papas con cuero [PROTEINA] (receta PAPAS-CON-CUERO-110-GRAMOS): 149 g vs estándar 100 g (+49.0%)
+- Puré de zanahorias [GUARNICION] (receta PURE-DE-ZANAHORIAS-60GR): 74 g vs estándar 50 g (+47.4%)
+- Llapingachos [GUARNICION] (receta LLAPINGACHOS-60GR): 73 g vs estándar 50 g (+46.0%)
+- Camarones apanados [PROTEINA] (receta CAMARONES-APANADOS-110-GR): 146 g vs estándar 100 g (+46.0%)
+
+## Preguntas y decisiones para el cliente
+
+- **¿Los techos ($1.24/$1.38/$0.84/$1.44) incluyen el 8%?** Las recetas ya lo suman y la hoja Composición no lo declara: comparar sin saberlo genera falsas alertas o ninguna. PENDIENTE.
+- **Bistec $0.70**: la referencia parece ser solo la carne ($0.708 con catálogo); confirmar si es carne o plato completo. PENDIENTE.
+- **Techo de refrigerio $0.84 vs costos reales (0.41/0.43/0.54)**: la alerta casi nunca saltaría; confirmar alcance del techo. PENDIENTE.
+- **Gramaje por servicio**: hoy el libro usa el mismo gramaje para Almuerzo 1 y 2 (no se reescala); confirmar si aplica escala. PENDIENTE.
+- **Duplicados de catálogo**: decisión aplicada → gana el precio MÁXIMO (prudencia); fideo $0.45 y parmesano $1.59. CONFIRMAR.
+- **Alertas de combinación diaria** (2 proteínas × 2 guarniciones × 2 bebidas = 8): decisión → alerta por CADA combinación, con la PEOR destacada en el resumen (Fase 3). DEFINIDO.
