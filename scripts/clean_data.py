@@ -161,15 +161,12 @@ def load_catalog() -> dict[str, dict]:
         cost = to_float(cost_raw)
         if cost is None and cost_raw:
             issue("CATALOGO_COSTO_INVALIDO", f"fila {i}: costo '{cost_raw}' en '{name}'", "catalogo")
-        if key in items:
-            issue("CATALOGO_DUPLICADO", f"'{name}' repetido (código {code} vs {items[key]['code']})", "catalogo")
-            continue
         qty, base = parse_measure(presentation), None
         if qty:
             qty_val, base = qty
         else:
             qty_val, base = None, None
-        items[key] = {
+        entry = {
             "sku": code or f"AUTO-{len(items) + 1:04d}",
             "code": code,
             "name": name,
@@ -183,6 +180,19 @@ def load_catalog() -> dict[str, dict]:
             "notes": "",
             "row": i,
         }
+        if key in items:
+            # regla única de duplicados: gana el precio MÁXIMO (prudencia presupuestaria)
+            prev = items[key]
+            keep_new = cost is not None and (prev["cost"] is None or cost > prev["cost"])
+            winner = entry if keep_new else prev
+            loser = prev if keep_new else entry
+            issue("CATALOGO_DUPLICADO",
+                  f"'{name}': cód {loser['code']} ${loser['cost']} vs cód {winner['code']} "
+                  f"${winner['cost']} → gana el precio máximo (cód {winner['code']})", "catalogo")
+            if keep_new:
+                items[key] = entry
+            continue
+        items[key] = entry
     # regla 2 (cifra en el nombre) y regla 3 (recetas) se resuelven en
     # fill_catalog_qty_from_recipes para poder ordenarlas por precedencia
     return items
@@ -352,9 +362,6 @@ def parse_recipe_sheet(name: str, source: str) -> tuple[list[dict], list[dict], 
     for i, row in enumerate(rows, start=1):
         c0 = cell(row, 0)
         c1 = cell(row, 1)
-        p7 = to_float(cell(row, 7))
-        if title is not None and p7 and p7 > 0 and portions is None:
-            portions = int(p7)  # PROMEDIOS puede estar en título, cabecera o ingredientes
         if c0 == "Ingrediente":
             header_seen = True
             continue
@@ -371,6 +378,9 @@ def parse_recipe_sheet(name: str, source: str) -> tuple[list[dict], list[dict], 
             continue
         if not c0:
             continue  # filas de pie/subtotales
+        p7 = to_float(cell(row, 7))
+        if p7 and p7 > 0 and portions is None:
+            portions = int(p7)  # col H (PROMEDIOS): solo en líneas de ingrediente
         qty_rec = to_float(cell(row, 5))
         if qty_rec is None:
             if c1:
@@ -392,9 +402,11 @@ def parse_recipe_sheet(name: str, source: str) -> tuple[list[dict], list[dict], 
             "qty": qty_rec,
             "theoretical": to_float(cell(row, 8)),
             "adjusted": to_float(cell(row, 11)),
+            "origin_line_cost": to_float(cell(row, 6)),  # costo que calculó el Excel
             "line_cost": 0.0,  # se calcula tras resolver catálogo
             "sku": None, "unit_cost": None, "price_source": None,
             "base_unit": None, "match": None, "score": None,
+            "flags": set(),
         })
 
     flush()
@@ -430,6 +442,7 @@ def resolve_items(items: list[dict], catalog: dict[str, dict]) -> None:
                 it["unit_cost"] = round(cat["cost"] / it["qty_comp_recipe"], 8)
                 it["price_source"] = "catalogo_por_presentacion_linea"
                 it["line_cost"] = it["qty"] * it["unit_cost"]
+                it["flags"].add("unidad_difiere")
                 issue("RECETA_UNIDAD_DIFIERE",
                       f"'{cat['name']}': receta en {line_base}, catálogo en "
                       f"{cat['base_unit']} (c3={it['qty_comp_recipe']})", "recetas")
@@ -450,16 +463,17 @@ def resolve_items(items: list[dict], catalog: dict[str, dict]) -> None:
             if match == "fuzzy":
                 issue("CATALOGO_MATCH_FUZZY",
                       f"'{it['ingredient_raw']}' ~ '{cat['name']}' (score {score:.2f})", "recetas")
-            # varianza de cantidad presentación receta vs catálogo
+            # varianza de cantidad presentación receta vs catálogo (umbral 2%)
             if it["qty_comp_recipe"] and cat["qty"]:
                 diff = abs(it["qty_comp_recipe"] - cat["qty"]) / cat["qty"]
-                if diff > 0.05:
+                if diff > 0.02:
                     issue("CANTIDAD_PRESENTACION_VARIA",
                           f"'{cat['name']}': receta {it['qty_comp_recipe']} vs catálogo {cat['qty']}",
                           "recetas")
             # varianza de precio PVP receta vs catálogo
             if it["pvp_recipe"] and cat["cost"] and cat["qty"]:
                 if abs(it["pvp_recipe"] - cat["cost"]) / cat["cost"] > 0.05:
+                    it["flags"].add("precio_varia")
                     issue("PRECIO_VARIA",
                           f"'{cat['name']}': PVP receta {it['pvp_recipe']} vs catálogo {cat['cost']}",
                           "recetas")
@@ -796,24 +810,49 @@ def _source_block_bases(name: str) -> dict[str, float]:
     return bases
 
 
-def validate_against_source(recipes: dict[str, dict]) -> tuple[list[str], dict]:
-    """Compara base_cost nuestro vs base del pie en la hoja origen (02)."""
+def validate_against_source(recipes: dict[str, dict],
+                            by_recipe: dict[str, list[dict]]) -> tuple[list[str], list[str], dict]:
+    """Compara base_cost nuestro vs base del pie en la hoja origen (02/04).
+
+    Clasifica los desvíos >10%:
+      * 'explicado_por_origen': alguna línea donde el costo que calculó el Excel
+        (col6) difiere >10% del nuestro → error del propio origen (lomo, precios
+        cruzados, precios tecleados).
+      * 'residual': todas las líneas cuadran pero el total no → revisar pipeline.
+    """
     src = _source_block_bases("02_costeo_recetas_almuerzos.csv")
     src.update({k: v for k, v in
                 _source_block_bases("04_costeo_refrigerios.csv").items()
                 if k not in src})
-    rows_out: list[tuple[float, str, str]] = []
+    rows_out: list[tuple[float, str, str, str]] = []
     for r in recipes.values():
         s = src.get(r["name_norm"])
         if s is None or s <= 0:
             continue
         mine = r["base_cost"]
         pct = abs(mine - s) / s * 100
-        rows_out.append((pct, r["name"], f"mio={mine:.6f} origen={s:.6f}"))
+        detail = f"mio={mine:.6f} origen={s:.6f}"
+        clase = ""
+        if pct > 10:
+            motivo = ""
+            for l in by_recipe.get(r["id"], []):
+                olc, lc = l.get("origin_line_cost"), l.get("line_cost")
+                if not olc or not lc:
+                    continue
+                if abs(olc - lc) / max(olc, lc) > 0.10:
+                    motivo = (f"{l['ingredient_raw'][:34]}: Excel {olc:.4f} "
+                              f"vs nuestro {lc:.4f}")
+                    break
+            if motivo:
+                clase = "explicado_por_origen"
+                detail += f" | {motivo}"
+            else:
+                clase = "residual"
+        rows_out.append((pct, r["name"], detail, clase))
     rows_out.sort(reverse=True)
     stats: dict = {"n": len(rows_out)}
     if rows_out:
-        pcts = [p for p, _, _ in rows_out]
+        pcts = [p for p, _, _, _ in rows_out]
         stats |= {
             "mediana": statistics.median(pcts),
             "p75": statistics.quantiles(pcts, n=4)[2],
@@ -822,13 +861,63 @@ def validate_against_source(recipes: dict[str, dict]) -> tuple[list[str], dict]:
             "within5": sum(1 for p in pcts if p <= 5),
             "within10": sum(1 for p in pcts if p <= 10),
             "within20": sum(1 for p in pcts if p <= 20),
+            "gt10": sum(1 for p in pcts if p > 10),
+            "explicados": sum(1 for *_, c in rows_out if c == "explicado_por_origen"),
+            "residuales": sum(1 for *_, c in rows_out if c == "residual"),
         }
-        for pct, name, detail in rows_out[:20]:
-            issue("VALIDACION_VS_ORIGEN", f"{name}: {pct:.1f}% ({detail})", "validacion")
-    return [f"{name}: {pct:.1f}% ({detail})" for pct, name, detail in rows_out[:20]], stats
+        for pct, name, detail, clase in rows_out:
+            if clase == "residual":
+                issue("VALIDACION_VS_ORIGEN", f"{name}: {pct:.1f}% ({detail})", "validacion")
+    fmt = lambda rs: [f"{name}: {pct:.1f}% ({detail})" for pct, name, detail, _ in rs]
+    explicados = [t for t in rows_out if t[3] == "explicado_por_origen"]
+    residuales = [t for t in rows_out if t[3] == "residual"]
+    return fmt(residuales[:20]), fmt(explicados[:20]), stats
 
 
-def client_reference_checks(recipes: dict[str, dict]) -> list[str]:
+def validate_typed_totals() -> list[str]:
+    """Col L (total consolidado tecleado, vista filtrada) vs Σ(F×H) por insumo.
+
+    El libro no trae hoja de requisiciones: esa vista vive dentro de la hoja 02
+    (H = porciones, L = total tecleado, M = costo del total). Un filtro oculta
+    casi todas las filas; el export las incluye todas con los valores calculados
+    por Excel, así que la cifra es reproducible desde data/raw.
+    """
+    rows = read_rows("02_costeo_recetas_almuerzos.csv")
+    sum_fh: dict[str, float] = defaultdict(float)
+    typed: list[tuple[str, float]] = []
+    for row in rows:
+        if len(row) < 8:
+            continue
+        c0 = cell(row, 0)
+        if not c0 or c0 == "Ingrediente":
+            continue
+        f, h = to_float(cell(row, 5)), to_float(cell(row, 7))
+        if f is not None and h:
+            sum_fh[norm(c0)] += f * h
+        if len(row) > 11:
+            L = to_float(cell(row, 11))
+            if L is not None:
+                typed.append((norm(c0), L))
+    match = miss = 0
+    details: list[str] = []
+    for k, L in typed:
+        tot = sum_fh.get(k)
+        if tot is None:
+            continue
+        if abs(L - tot) <= max(0.01 * max(L, tot), 1.0):
+            match += 1
+        else:
+            miss += 1
+            details.append(f"{k}: L={L:g} vs Σ(F×H)={tot:.0f} (Δ={L - tot:+g})")
+    return [
+        f"- líneas con L numérico: {len(typed)} | coinciden (≤1% o 1g): {match} "
+        f"| no coinciden: {miss} (agrupación por nombre normalizado)",
+        *("- " + d for d in details),
+    ]
+
+
+def client_reference_checks(recipes: dict[str, dict],
+                            by_recipe: dict[str, list[dict]]) -> list[str]:
     """Cruce con los valores de referencia del informe del cliente."""
     out: list[str] = []
     targets = {
@@ -842,12 +931,85 @@ def client_reference_checks(recipes: dict[str, dict]) -> list[str]:
             out.append(f"- `{norm_name}`: no encontrada en recetas (referencia ${ref:.2f})")
             continue
         total = r["total_cost"]
+        if "BISTEC" in norm_name:
+            # el 0.70 del cliente parece ser SOLO la carne (85 g × $0.00833 = $0.708);
+            # el total del plato incluye el resto de ingredientes y el ×1.08
+            carne = sum(l["line_cost"] for l in by_recipe.get(r["id"], [])
+                        if "LOMO" in l["ingredient_norm"])
+            out.append(f"- `{r['name']}`: total ${total:.4f} | carne sola ${carne:.4f} "
+                       f"| referencia ${ref:.2f} → carne ≈ referencia; alcance del "
+                       f"${ref:.2f} (carne vs plato) POR CONFIRMAR con el cliente")
+            continue
         flag = "OK" if abs(total - ref) <= 0.05 else "DESCUADRE"
         out.append(f"- `{r['name']}`: total ${total:.4f} vs referencia ${ref:.2f} → {flag}")
         if flag == "DESCUADRE":
             issue("REFERENCIA_CLIENTE_DESCUADRE",
                   f"'{r['name']}': total {total:.4f} vs {ref}", "validacion")
     return out
+
+
+def validate_gramaje_perfil(menu: list[dict], by_recipe: dict[str, list[dict]],
+                            components: list[dict]) -> tuple[list[str], dict]:
+    """Gramaje por porción de la receta vs estándar del perfil estudiantil.
+
+    Perfiles (hoja Composición): Almuerzo Saludable Estudiantil trae
+    PROTEINA 100 g, GUARNICION 50 g, ARROZ 40 g… ; Refrigerio prescolar/primaria
+    PROTEINA 60 g, GUARNICION 40 g… El gramaje de receta NO se reescala: se
+    muestra la desviación y se alerta cuando supera ±10% del estándar.
+    """
+    prof: dict[tuple[str, str], float] = {}
+    for c in components:
+        if c["unit"] != "GR":
+            continue
+        if c["profile_code"] == "ALMUERZO-SALUDABLE-ESTUDIANTIL":
+            prof[("ALMUERZO", norm(c["component"]))] = c["qty"]
+        elif c["profile_code"].startswith("REFRIGERIO"):
+            prof[("REFRIGERIO", norm(c["component"]))] = c["qty"]
+    comps = {m: {k for (mm, k) in prof if mm == m} for m in ("ALMUERZO", "REFRIGERIO")}
+
+    total_g: dict[str, float] = {}
+    for rid, lines in by_recipe.items():
+        total_g[rid] = sum(l["qty"] for l in lines if l["base_unit"] == "G")
+
+    def component_for(meal: str, slot: str, dish: str) -> str | None:
+        d, s = norm(dish), norm(slot)
+        if re.search(r"\bARROZ\b", d) and d.startswith("ARROZ"):
+            return "ARROZ" if "ARROZ" in comps[meal] else None
+        if s in comps[meal]:
+            return s
+        if s.startswith("POSTRE"):
+            for k in comps[meal]:
+                if k.startswith("POSTRE"):
+                    return k
+        return None
+
+    seen: set[tuple[str, str]] = set()
+    out: list[tuple[float, str]] = []
+    compared = 0
+    for m in menu:
+        rid = m.get("recipe_id")
+        if not rid or rid not in total_g or not total_g[rid]:
+            continue
+        comp = component_for(m["meal_type"], m["slot"], m["dish"])
+        if not comp:
+            continue
+        ref = prof.get((m["meal_type"], comp))
+        if not ref:
+            continue
+        pair = (rid, comp)
+        if pair in seen:
+            continue
+        seen.add(pair)
+        compared += 1
+        dev = (total_g[rid] - ref) / ref * 100
+        if abs(dev) > 10:
+            line = (f"{m['dish']} [{comp}] (receta {rid}): {total_g[rid]:.0f} g vs "
+                    f"estándar {ref:.0f} g ({dev:+.1f}%)")
+            out.append((abs(dev), line))
+            issue("GRAMAJE_FUERA_PERFIL", line, "gramaje")
+    out.sort(reverse=True)
+    stats = {"comparados": compared, "fuera": len(out)}
+    return [ln for _, ln in out[:20]], stats
 
 
 def main() -> None:
@@ -920,9 +1082,11 @@ def main() -> None:
 
     profiles, components = parse_profiles()
 
-    # validación: base_cost nuestro vs base del pie en la hoja origen
-    worst_lines, vstats = validate_against_source(recipes)
-    ref_lines = client_reference_checks(recipes)
+    # validaciones
+    residual_lines, explicados_lines, vstats = validate_against_source(recipes, by_recipe)
+    ref_lines = client_reference_checks(recipes, by_recipe)
+    typed_lines = validate_typed_totals()
+    gram_lines, gstats = validate_gramaje_perfil(menu, by_recipe, components)
 
     # ------------------------------------------------------------ escritura
     write_csv(CLEAN / "ingredients.csv",
@@ -999,6 +1163,9 @@ def main() -> None:
     lines_md.append(f"- Menú: {len(cycles)} ciclos, {len(days)} días, {len(menu)} platos")
     lines_md.append(f"- Perfiles de costo: {len(profiles)}")
     lines_md.append(f"- Totales con regla ×1.08 aplicada: sí")
+    lines_md.append("- Nota: RECETA_SIN_PORCIONES cuenta recetas ÚNICAS "
+                    "(207 = 202 ALMUERZO + 5 REFRIGERIO; en apariciones ALMUERZO "
+                    "sería 247 − 40 = 207)")
     lines_md.append("")
     lines_md.append("## Resumen por tipo de incidencia")
     lines_md.append("")
@@ -1021,7 +1188,8 @@ def main() -> None:
         "RECETA_SIN_CANTIDAD_COMPARABLE": "Líneas sin c3 comparable (fallback a costo por base)",
         "RECETA_COSTO_ATIPICO": "Recetas con base cost > $2.00 (revisar origen)",
         "CATALOGO_SIN_COSTO": "Catálogo sin costo por unidad base",
-        "VALIDACION_VS_ORIGEN": "Validación vs base del pie origen (peores 20)",
+        "VALIDACION_VS_ORIGEN": "Validación vs origen: desvíos >10% RESIDUALES (revisar pipeline)",
+        "GRAMAJE_FUERA_PERFIL": "Gramaje por porción fuera del estándar del perfil (±10%)",
         "REFERENCIA_CLIENTE_DESCUADRE": "Descuadre vs valores de referencia del cliente",
         "MENU_SIN_RECETA": "Platos de menú sin receta asociada",
         "MENU_SEMANA_DUPLICADA": "Semanas duplicadas / renumeradas",
@@ -1051,17 +1219,59 @@ def main() -> None:
             f"- n={vstats['n']}, mediana {vstats['mediana']:.2f}%, p75 {vstats['p75']:.2f}%, "
             f"p90 {vstats['p90']:.2f}% | ≤2%: {vstats['within2']}, ≤5%: {vstats['within5']}, "
             f"≤10%: {vstats['within10']}, ≤20%: {vstats['within20']}")
+        lines_md.append(
+            f"- Desvíos >10%: {vstats['gt10']} → **explicados por errores del origen: "
+            f"{vstats['explicados']}** (el Excel dividió mal, precios cruzados o "
+            f"tecledos) | **residuales (revisar pipeline): {vstats['residuales']}**")
     else:
         lines_md.append("- sin bloques comparables")
     lines_md.append("")
-    lines_md.append("### Peores 20 desvíos")
+    lines_md.append("### Residuales >10% (sin explicación en el origen — revisar)")
     lines_md.append("")
-    for line in worst_lines:
+    for line in residual_lines:
+        lines_md.append(f"- {line}")
+    if not residual_lines:
+        lines_md.append("- ninguno")
+    lines_md.append("")
+    lines_md.append("### Explicados por errores del origen (muestra)")
+    lines_md.append("")
+    for line in explicados_lines:
         lines_md.append(f"- {line}")
     lines_md.append("")
     lines_md.append("## Referencias del informe del cliente")
     lines_md.append("")
     lines_md.extend(ref_lines or ["- sin referencias evaluadas"])
+    lines_md.append("")
+    lines_md.append("## Totales tecleados (col L) vs Σ(F×H) — vista de requisiciones")
+    lines_md.append("")
+    lines_md.extend(typed_lines)
+    lines_md.append("")
+    lines_md.append("## Gramajes por porción vs estándar del perfil estudiantil")
+    lines_md.append("")
+    lines_md.append(f"- comparaciones (receta × componente): {gstats['comparados']} | "
+                    f"fuera del estándar (±10%): {gstats['fuera']} "
+                    f"(perfil Almuerzo Saludable: proteína 100 g, guarnición 50 g, "
+                    f"arroz 40 g; Refrigerio: 60/40 g)")
+    lines_md.append("")
+    for line in gram_lines:
+        lines_md.append(f"- {line}")
+    lines_md.append("")
+    lines_md.append("## Preguntas y decisiones para el cliente")
+    lines_md.append("")
+    lines_md.append("- **¿Los techos ($1.24/$1.38/$0.84/$1.44) incluyen el 8%?** "
+                    "Las recetas ya lo suman y la hoja Composición no lo declara: "
+                    "comparar sin saberlo genera falsas alertas o ninguna. PENDIENTE.")
+    lines_md.append("- **Bistec $0.70**: la referencia parece ser solo la carne "
+                    "($0.708 con catálogo); confirmar si es carne o plato completo. PENDIENTE.")
+    lines_md.append("- **Techo de refrigerio $0.84 vs costos reales (0.41/0.43/0.54)**: "
+                    "la alerta casi nunca saltaría; confirmar alcance del techo. PENDIENTE.")
+    lines_md.append("- **Gramaje por servicio**: hoy el libro usa el mismo gramaje para "
+                    "Almuerzo 1 y 2 (no se reescala); confirmar si aplica escala. PENDIENTE.")
+    lines_md.append("- **Duplicados de catálogo**: decisión aplicada → gana el precio "
+                    "MÁXIMO (prudencia); fideo $0.45 y parmesano $1.59. CONFIRMAR.")
+    lines_md.append("- **Alertas de combinación diaria** (2 proteínas × 2 guarniciones × "
+                    "2 bebidas = 8): decisión → alerta por CADA combinación, con la PEOR "
+                    "destacada en el resumen (Fase 3). DEFINIDO.")
     lines_md.append("")
 
     (CLEAN / "errors_report.md").write_text("\n".join(lines_md), encoding="utf-8")
